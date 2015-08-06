@@ -1,6 +1,7 @@
 # mastermindJS.py
 # Created by Jo Narvaez-Jesen & Shannon Poehlemn
 
+<<<<<<< Updated upstream
 # Here was the idea I had for graphics. Colors will be changed once we
 #         decide on a design.
 
@@ -15,7 +16,7 @@ def main():
           win = GraphWin('Mastermind',700,700)
           win.setCoords(0,0,30,30)
           win.setBackground('tan')
-          
+
           ### Board background- FR side where colors with coorispoding letters are.
           background = Rectangle(Point(2,29),Point(28,2))
           background.draw(win)
@@ -207,7 +208,7 @@ def main():
           #FL section 3
           s3fl = Line(Point(2,11),Point(6,11))
           s3fl.draw(win)
-          
+
            #FL section 4
           s4fl = Line(Point(2,14),Point(6,14))
           s4fl.draw(win)
@@ -231,12 +232,12 @@ def main():
           ######VERTICAL LINE SECTION
           vLfL = Line(Point(6,2),Point(6,29))
           vLfL.draw(win)
-          
+
 
           #########################################################
           #FAR RIGHT SIDE AREA WHERE GAME PEGS ARE LOCATED.
           #########################################################
-          
+
 
           ####HORIZONTAL LINE SECTIONS#####
           ###FR section 1
@@ -246,7 +247,7 @@ def main():
           ###FR section 2
           s2fr = Line(Point(23,8),Point(28,8))
           s2fr.draw(win)
-          
+
           ###FR section 3
           s3fr = Line(Point(23,11),Point(28,11))
           s3fr.draw(win)
@@ -262,7 +263,7 @@ def main():
           ###FR section 6
           s6fr = Line(Point(23,20),Point(28,20))
           s6fr.draw(win)
-          
+
           ###FR section 7
           s7fr = Line(Point(23,23),Point(28,23))
           s7fr.draw(win)
@@ -281,7 +282,7 @@ def main():
 
           #########################
           #####NUMBERS FOR FR SECTION
-          
+
           # number 1
           t1 = Text(Point(24,3.5),'1')
           t1.draw(win)
@@ -307,13 +308,13 @@ def main():
           # number 8
           t8 = Text(Point(24,24.5),'8')
           t8.draw(win)
-          
+
           ######################################################
           #################  ROUND GAME PEGS   ################
           #REFER TO THESE PIECES FOR ANY LOOP/ANMATION ACTIONS#
           #########  INVOLVING THE PIECE OF THE GAME  #########
           ########################################################
-          
+
           ## blue
           blueBall = Circle(Point(26.5,3.5),.8)
           blueBall.draw(win)
@@ -388,6 +389,6 @@ def main():
           ewText4 = Text(Point(26.5,23.5),"Wrong Place")
           ewText4.draw(win)
           ewText4.setSize(10)
-          
 
-main()         
+
+main()
