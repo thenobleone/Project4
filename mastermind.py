@@ -1,7 +1,6 @@
 # mastermindJS.py
 # Created by Jo Narvaez-Jesen & Shannon Poehlemn
 
-<<<<<<< Updated upstream
 # Here was the idea I had for graphics. Colors will be changed once we
 #         decide on a design.
 
