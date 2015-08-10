@@ -6,22 +6,16 @@
 
 from graphics import *
 import random
+#from collections import Counter
 
 # fucntion to determine number of black and white pegs
 def ansCompare (master, guess):
     bCount = 0
     wCount = 0
 
-    for i in range (len (guess)):
+    for i in range ( len(master)):
         if master[i] == guess [i]:
             bCount += 1
-            print ("black:", bCount, "color:", master[i])
-            print (master)
-
-
-    colorCount = ['blue', 'green', 'orange', 'purple', 'red', 'yellow']
-    masterCount = []
-    guessCount = []
 
     for i in range (len (colorCount)):
         masterCount.append (master.count(colorCount[i]))
@@ -36,7 +30,9 @@ def ansCompare (master, guess):
             wCount += masterCount[i]
 
 
+    print ("guess:", guess)
     print ("white", wCount)
+    print ("black", bCount)
 
 
 #def drawGuess (win, guessColor)
@@ -102,7 +98,7 @@ def gameWindow ():
 def main():
     win = gameWindow ()
     #colorMasterList = masterCode ()
-    colorMasterList = ['purple', 'orange', 'yellow', 'red']
+    colorMasterList = ['yellow', 'orange', 'yellow', 'red']
     print ("mc:", colorMasterList)
     boxes = entryBoxes (win, 3.5)
     guess = getGuess (win, boxes)
