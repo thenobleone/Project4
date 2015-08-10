@@ -16,9 +16,27 @@ def ansCompare (master, guess):
         if master[i] == guess [i]:
             bCount += 1
             print ("black:", bCount, "color:", master[i])
-        elif
+            print (master)
 
 
+    colorCount = ['blue', 'green', 'orange', 'purple', 'red', 'yellow']
+    masterCount = []
+    guessCount = []
+
+    for i in range (len (colorCount)):
+        masterCount.append (master.count(colorCount[i]))
+        guessCount.append (guess.count (colorCount[i]))
+
+    for i in range (len (colorCount)):
+        if masterCount[i] == 0 or guessCount[i] == 0:
+            wCount += 0
+        elif masterCount[i] > guessCount[i]:
+            wCount += guessCount[i]
+        elif masterCount[i] < guessCount[i]:
+            wCount += masterCount[i]
+
+
+    print ("white", wCount)
 
 
 #def drawGuess (win, guessColor)
@@ -66,7 +84,7 @@ def entryBoxes (win, y):
 # randomly creates the 4 color code to be guessed by the user
 def masterCode ():
     masterColors = []
-    colorList = ['orange', 'red', 'blue', 'green', 'purple', 'yellow']
+    colorList = ['blue', 'green', 'orange', 'purple', 'red', 'yellow']
 
     for i in range (4):
         masterColors.append (random.choice(colorList))
