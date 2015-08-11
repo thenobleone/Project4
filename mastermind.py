@@ -6,6 +6,16 @@
 from graphics import *
 import random
 
+def revealSolution (master, win):
+    mColor = [None] * 4
+    x, y = 9, 28
+
+    for i in range (len (master)):
+        mColor[i] = Circle (Point (x, y), .75)
+        mColor[i].setFill (master[i])
+        mColor[i].draw (win)
+        x += 4
+
 def finishedCondition (score, win):
     popUp = Rectangle (Point (5, 10), Point (25, 20,))
     popUp.setFill ('lightskyblue')
@@ -24,14 +34,15 @@ def finishedCondition (score, win):
         message.draw (win)
 
 def drawPegs (black, white, peg, win):
+    print ("black", black)
+    print ("white", white)
+
     for i in range (len (peg)):
         if black > 0:
             peg[i].setFill ('black')
-            #peg[i].draw (win)
             black -= 1
         elif white > 0:
             peg[i].setFill ('white')
-            #peg[i].draw (win)
             white -= 1
 
 # fucntion to determine number of black and white pegs
@@ -39,17 +50,19 @@ def ansCompare (master, guess):
     bCount = 0
     wCount = 0
 
-    for i in range (len (master)):
-        if master[i] == guess[i]:
+    for i in range (len (guess)):
+        if guess[i] == master[i]:
             guess[i] = 'black'
         else:
             for j in range (len (guess)):
-                if master[j] == guess[i]:
+                if master[j] == guess[i] and guess[i] != 'black':
                     guess[i] = 'white'
+                print ("g{0} = {1}".format (i, guess))
+                print ("m{0} = {1}".format (i, master))
 
     return guess.count ('black'), guess.count ('white')
 
-def drawGuess (win, boxes, turn, guessColor):
+def drawGuess (win, boxes, turn, color):
     x, y = 9, 3
     if turn > 0:
         y = y + (2 * turn)
@@ -57,7 +70,7 @@ def drawGuess (win, boxes, turn, guessColor):
     for i in range (len (boxes)):
         boxes[i].undraw ()
         guessDot = Circle (Point (x,y), .75)
-        guessDot.setFill (guessColor[i])
+        guessDot.setFill (color[i])
         guessDot.draw (win)
         x += 4
 
@@ -88,17 +101,6 @@ def getGuess (win, info):
     for i in range (len (info)):
         color.append (info[i].getText ())
     return color
-
-    # Figuring out way to set the click to the submit button area only
-    #click = win.getMouse ()
-    #x, y = click.getX (), click.getY ()
-    #if x >=14 and x <= 16:
-    #    if y <= 1.5 and y >= .5:
-    #        for i in range (len (info)):
-    #            color.append (info[i]v.getText ())
-    #        return color
-    #else:
-    #    getGuess(win, info)  <--- this is the problem, returning to the function only restarts the function itself and not it's places in the sequence
 
 # Create 4 pegs
 def createPegs (win, turn):
@@ -158,7 +160,6 @@ def createWindow ():
     win = GraphWin('Mastermind', 700, 700)
     win.setCoords(0, 0, 30, 30)
     win.setBackground('tan')
-
     return win
 
 #runs all the functions
@@ -166,8 +167,7 @@ def main():
     turnCount = 0
     gameWin = createWindow ()
     colorMasterList = masterCode ()
-
-    print ("mc:", colorMasterList)
+    print (colorMasterList)
 
     for turnCount in range (10):
         pegCircles = createPegs (gameWin, turnCount)
@@ -178,6 +178,7 @@ def main():
         bPeg, wPeg = ansCompare (list (colorMasterList), list (colorGuessList))
 
         if bPeg == 4:
+            revealSolution (list (colorMasterList), gameWin)
             result = finishedCondition ('victory', gameWin)
             break
         elif turnCount == 9:
