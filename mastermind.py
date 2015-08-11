@@ -87,10 +87,10 @@ def getGuess (win, info):
     #if x >=14 and x <= 16:
     #    if y <= 1.5 and y >= .5:
     #        for i in range (len (info)):
-    #            color.append (info[i].getText ())
+    #            color.append (info[i]v.getText ())
     #        return color
     #else:
-    #    getGuess(win, info)
+    #    getGuess(win, info)  <--- this is the problem, returning to the function only restarts the function itself and not it's places in the sequence
 
 # creates the 4 needed entry boxes
 def entryBoxes (win, turn):
