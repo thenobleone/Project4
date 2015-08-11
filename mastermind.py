@@ -5,7 +5,25 @@
 
 from graphics import *
 import random
-#from collections import Counter
+
+
+def finishedCondition (score, win):
+    popUp = Rectangle (Point (5, 10), Point (25, 20,))
+    popUp.setFill ('lightskyblue')
+    popUp.draw (win)
+
+    message = Text (Point (15, 15), "")
+    message.setStyle("bold")
+    message.setSize (32)
+    message.setTextColor ("white")
+
+    if score == 'victory':
+        message.setText ("!! Congrats You Win !!")
+        message.draw (win)
+    else:
+        message.setText ("Sorry, you lose!")
+        message.draw (win)
+
 
 # fucntion to determine number of black and white pegs
 def ansCompare (master, guess):
@@ -23,10 +41,21 @@ def ansCompare (master, guess):
 
     return guess.count ('black'), guess.count ('white')
 
-#def drawGuess (win, guessColor)
+def drawGuess (win, boxes, turn, guessColor):
+    x, y = 9, 3
+    if turn > 0:
+        y = y + (2 * turn)
+
+    for i in range (len (boxes)):
+        boxes[i].undraw ()
+        guessDot = Circle (Point (x,y), .75)
+        guessDot.setFill (guessColor[i])
+        guessDot.draw (win)
+        x += 4
+
 
 #function to convert single letter inputs into the needed fill color values
-def colorConvert (text):
+def colorConvert (text, win, turn):
     for i in range (len (text)):
         if text[i].lower () == 'o':
             text[i] = 'orange'
@@ -38,8 +67,10 @@ def colorConvert (text):
             text[i] = 'green'
         elif text[i].lower () == 'y':
             text[i] = 'yellow'
-        else:
+        elif text[i].lower () == 'b':
             text[i] = 'blue'
+        else:
+            entryBoxes (win, turn)
 
     return text
 
@@ -52,10 +83,23 @@ def getGuess (win, info):
         color.append (info[i].getText ())
     return color
 
+    # Figuring out way to set the click to the submit button area only
+    #click = win.getMouse ()
+    #x, y = click.getX (), click.getY ()
+    #if x >=14 and x <= 16:
+    #    if y <= 1.5 and y >= .5:
+    #        for i in range (len (info)):
+    #            color.append (info[i].getText ())
+    #        return color
+    #else:
+    #    getGuess(win, info)
+
 # creates the 4 needed entry boxes
-def entryBoxes (win, y):
+def entryBoxes (win, turn):
     entryBox = [None]*4
-    x = 8.5
+    x, y = 9, 3
+    if turn > 0:
+        y = y + (2 * turn)
 
     for i in range (4):
         entryBox[i] = Entry (Point (x, y), 4)
@@ -75,27 +119,40 @@ def masterCode ():
     return masterColors
 
 # creates the base window
-def gameWindow ():
-    win = GraphWin('Mastermind',700,700)
+def createWindow ():
+    win = GraphWin('Mastermind', 700, 700)
     win.setCoords(0, 0, 30, 30)
-    win.setBackground('gray')
+    win.setBackground('tan')
 
+    subButton = Rectangle (Point (14, 1.5), Point (16, .5))
+    subButton.setFill ('lightgray')
+    subButton.setOutline ('darkgray')
+    subButton.draw (win)
+
+    submit = Text (Point (15, 1), "Submit")
+    submit.setFill ('black')
+    submit.draw (win)
     return win
 
 #runs all the functions
 def main():
-    win = gameWindow ()
+    turnCount = 0
+    gameWin = createWindow ()
+    colorMasterList = masterCode ()
 
-    for i in range (11):
-        colorMasterList = masterCode ()
-        print ("mc:", colorMasterList)
-        boxes = entryBoxes (win, 3.5)
-        guess = getGuess (win, boxes)
-        colorGuessList = colorConvert (guess)
+    print ("mc:", colorMasterList)
+
+    for turnCount in range (10):
+        boxes = entryBoxes (gameWin, turnCount)
+        guess = getGuess (gameWin, boxes)
+        colorGuessList = colorConvert (guess, gameWin, turnCount)
+        drawGuess (gameWin, boxes, turnCount, colorGuessList)
         bPeg, wPeg = ansCompare (list (colorMasterList), list (colorGuessList))
-        if bPeg = 4:
-            break:
-        else:
-            i += 1
+
+        if bPeg == 4:
+            result = finishedCondition ('victory', gameWin)
+            break
+        elif turnCount == 9:
+            result = finishedCondition ('lost', gameWin)
 
 main()
