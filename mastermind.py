@@ -3,7 +3,6 @@
 
 # Program design to recreate the game Mastermind with a GUI interface
 
-
 from graphics import *
 import random
 #from collections import Counter
@@ -13,27 +12,16 @@ def ansCompare (master, guess):
     bCount = 0
     wCount = 0
 
-    for i in range ( len(master)):
-        if master[i] == guess [i]:
-            bCount += 1
+    for i in range (len (master)):
+        if master[i] == guess[i]:
+            guess[i] = 'black'
+        else:
+            for j in range (len (guess)):
+                if master[j] == guess[i]:
+                    guess[i] = 'white'
+                    master[j] = 'white'
 
-    for i in range (len (colorCount)):
-        masterCount.append (master.count(colorCount[i]))
-        guessCount.append (guess.count (colorCount[i]))
-
-    for i in range (len (colorCount)):
-        if masterCount[i] == 0 or guessCount[i] == 0:
-            wCount += 0
-        elif masterCount[i] > guessCount[i]:
-            wCount += guessCount[i]
-        elif masterCount[i] < guessCount[i]:
-            wCount += masterCount[i]
-
-
-    print ("guess:", guess)
-    print ("white", wCount)
-    print ("black", bCount)
-
+    return guess.count ('black'), guess.count ('white')
 
 #def drawGuess (win, guessColor)
 
@@ -83,7 +71,7 @@ def masterCode ():
     colorList = ['blue', 'green', 'orange', 'purple', 'red', 'yellow']
 
     for i in range (4):
-        masterColors.append (random.choice(colorList))
+        masterColors.append (random.choice (colorList))
     return masterColors
 
 # creates the base window
@@ -97,12 +85,17 @@ def gameWindow ():
 #runs all the functions
 def main():
     win = gameWindow ()
-    #colorMasterList = masterCode ()
-    colorMasterList = ['yellow', 'orange', 'yellow', 'red']
-    print ("mc:", colorMasterList)
-    boxes = entryBoxes (win, 3.5)
-    guess = getGuess (win, boxes)
-    colorGuessList = colorConvert (guess)
-    results = ansCompare (colorMasterList, colorGuessList)
+
+    for i in range (11):
+        colorMasterList = masterCode ()
+        print ("mc:", colorMasterList)
+        boxes = entryBoxes (win, 3.5)
+        guess = getGuess (win, boxes)
+        colorGuessList = colorConvert (guess)
+        bPeg, wPeg = ansCompare (list (colorMasterList), list (colorGuessList))
+        if bPeg = 4:
+            break:
+        else:
+            i += 1
 
 main()
