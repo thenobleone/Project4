@@ -6,7 +6,6 @@
 from graphics import *
 import random
 
-
 def finishedCondition (score, win):
     popUp = Rectangle (Point (5, 10), Point (25, 20,))
     popUp.setFill ('lightskyblue')
@@ -52,7 +51,6 @@ def drawGuess (win, boxes, turn, guessColor):
         guessDot.setFill (guessColor[i])
         guessDot.draw (win)
         x += 4
-
 
 #function to convert single letter inputs into the needed fill color values
 def colorConvert (text, win, turn):
@@ -154,5 +152,7 @@ def main():
             break
         elif turnCount == 9:
             result = finishedCondition ('lost', gameWin)
+        else:
+            givePegs ()
 
 main()
