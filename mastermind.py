@@ -177,6 +177,15 @@ def createWindow ():
     win.setBackground('tan')
     return win
 
+#fucntion to clear graphic objects from the game window
+def clearFeatures (feature):
+    #tree to handle whether the graphic feature is a list of graphic objects or a single graphic object
+    if type(feature) = list:
+        for i in range (len (feature)):
+            feature[i].undraw ()
+    else:
+        feature.undraw ()
+
 #runs all the functions
 def main():
     # Creates and setups the inital parameters needed for the game
