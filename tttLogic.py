@@ -12,65 +12,129 @@
 from graphics import *
 import random
 
-def runGame (x, o, turn, playingSquare, win):
-    #if turn % 2 != 0:
-    #    turn += 1
-    #    gamePiece = o
-    #elif turn % 2 == 0:
-    #    turn += 1
-    #    gamePiece = x
-    gamePiece = o.clone ()
+def whoWon (winner):
+    print (winner)
 
+def winCheck (board, piece):
+    if board[0] == piece:
+        if board[4] == piece and board[8] == piece:
+            whoWon(piece)
+        elif board[4] == piece and board[8] == piece:
+            whoWon(piece)
+        elif board[3] == piece and board [6] == piece:
+            whoWon(piece)
+    elif board[1] == piece:
+        if board[4] == piece and board[7] == piece:
+            whoWon(piece)
+    elif board[2] == piece:
+        if board [5] == piece and board[8] == piece:
+            whoWon(piece)
+        elif board[4] == piece and board[6] == piece:
+            whoWon(piece)
+
+def filledPiece ():
+    print ("That piece has already been taken! Try again.")
+
+def placePiece (gamePiece, xo, storeMove, playingSquare, win):
     click = win.getMouse ()
     x, y = click.getX (), click.getY ()
-
+    print (xo)
     if x > 0 and x < 2:
         if y > 0 and y < 2:
-            print ("0")
-            playingSquare[0] = gamePiece
-            playingSquare[0].draw (win)
+            if storeMove[0] == None:
+                storeMove[0] = xo
+                playingSquare[0] = gamePiece
+                playingSquare[0].draw (win)
+            else:
+                filledPiece ()
         elif y > 2 and y < 4:
-            print ("1")
-            playingSquare[1] = gamePiece
-            playingSquare[1].draw (win)
-            playingSquare[1].move (0, 2)
+            if storeMove[1] == None:
+                storeMove[1] = xo
+                playingSquare[1] = gamePiece
+                playingSquare[1].draw (win)
+                playingSquare[1].move (0, 2)
+            else:
+                filledPiece ()
         elif y > 4 and y < 6:
-            print ("2")
-            playingSquare[2] = gamePiece
-            playingSquare[2].draw (win)
-            playingSquare[2].move (0, 4)
+            if storeMove[2] == None:
+                storeMove[2] = xo
+                playingSquare[2] = gamePiece
+                playingSquare[2].draw (win)
+                playingSquare[2].move (0, 4)
+            else:
+                filledPiece ()
     elif x > 2 and x < 4:
         if y > 0 and y < 2:
-            print ("3")
-            playingSquare[3] = gamePiece
-            playingSquare[3].draw (win)
-            playingSquare[3].move (2, 0)
+            if storeMove[3] == None:
+                storeMove[3] = xo
+                playingSquare[3] = gamePiece
+                playingSquare[3].draw (win)
+                playingSquare[3].move (2, 0)
+            else:
+                filledPiece ()
         elif y > 2 and y < 4:
-            print ("4")
-            playingSquare[4] = gamePiece
-            playingSquare[4].draw (win)
-            playingSquare[4].move (2, 2)
+            if storeMove[4] == None:
+                storeMove[4] = xo
+                playingSquare[4] = gamePiece
+                playingSquare[4].draw (win)
+                playingSquare[4].move (2, 2)
+            else:
+                filledPiece ()
         elif y > 4 and y < 6:
-            print ("5")
-            playingSquare[5] = gamePiece
-            playingSquare[5].draw (win)
-            playingSquare[5].move (2, 4)
+            if storeMove[5] == None:
+                storeMove[5] = xo
+                playingSquare[5] = gamePiece
+                playingSquare[5].draw (win)
+                playingSquare[5].move (2, 4)
+            else:
+                filledPiece ()
     elif x > 4 and x < 6:
         if y > 0 and y < 2:
-            print ("6")
-            playingSquare[6] = gamePiece
-            playingSquare[6].draw (win)
-            playingSquare[6].move (4, 0)
+            if storeMove[6] == None:
+                storeMove[6] = xo
+                playingSquare[6] = gamePiece
+                playingSquare[6].draw (win)
+                playingSquare[6].move (4, 0)
+            else:
+                filledPiece ()
         elif y > 2 and y < 4:
-            print ("7")
-            playingSquare[7] = gamePiece
-            playingSquare[7].draw (win)
-            playingSquare[7].move (4, 2)
+            if storeMove[7] == None:
+                storeMove[7] = xo
+                playingSquare[7] = gamePiece
+                playingSquare[7].draw (win)
+                playingSquare[7].move (4, 2)
+            else:
+                filledPiece ()
         elif y > 4 and y < 6:
-            print ("8")
-            playingSquare[8] = gamePiece
-            playingSquare[8].draw (win)
-            playingSquare[8].move (4, 4)
+            if storeMove[8] == None:
+                storeMove[8] = xo
+                playingSquare[8] = gamePiece
+                playingSquare[8].draw (win)
+                playingSquare[8].move (4, 4)
+            else:
+                filledPiece ()
+    print (storeMove)
+    if storeMove.count ('O') >= 3:
+        print (storeMove.count ('O'))
+        winCheck (storeMove, 'O')
+    elif storeMove.count ('X') >= 3:
+        print (storeMove.count ('X'))
+        winCheck (storeMove, 'X')
+
+def runGame (xP, oP, turn, squarePiece, win):
+    storeMove = [None] * 9
+    for i in range (9):
+        if turn % 2 != 0: #Odd numbered turn
+           turn += 1
+           gamePiece = xP.clone ()
+           move = 'X'
+        elif turn % 2 == 0: # Even numbered turn
+            turn += 1
+            gamePiece = oP.clone ()
+            move = 'O'
+        placePiece (gamePiece, move, storeMove, squarePiece, win)
+    winner = tie
+    whoWon ()
 
 def fieldPieces ():
     field = [None] * 9
@@ -94,14 +158,9 @@ def fieldPieces ():
                 y1 += 2
                 y2 += 2
 
-    xPiece = [None] * 2
-    for i in range (2):
-        if i == 0:
-            xPiece[i] = Line (Point (.25, .25), Point (1.75, 1.75))
-        elif i == 1:
-            xPiece[i] = Line (Point (1.75, 1.75), Point (.25, .25))
-        xPiece[i].setWidth (1)
-        xPiece[i].setFill ('navy')
+    xPiece = Polygon(Point(1,1),Point(.25,1.75),Point(1,1),Point(1.75,1.75),Point(1,1),Point(1.75,.25),Point(1,1,),Point(.25,.25))
+    xPiece.setWidth (8)
+    xPiece.setOutline ('navy')
 
     oPiece = Circle (Point (1, 1), .65)
     oPiece.setWidth (8)
@@ -127,8 +186,11 @@ def gameBoard (gameGUI):
         lines[i].draw(gameGUI)
 
 def clearFeatures (feature):
-    for i in range (len (feature)):
-        feature[i].undraw ()
+    if type(feature) == list:
+        for i in range (len (feature)):
+            feature[i].undraw ()
+    else:
+        feature.undraw ()
 
 def startScreen (window):
     startScreen = [None] * 3
