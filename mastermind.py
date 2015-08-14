@@ -60,11 +60,13 @@ def ansCompare (master, guess):
     for bp in range (len (master)):
         if guess[bp] == master[bp]:
             guess[bp] = 'black'
+            master[bp] = 'black'
         else:
             #wp == white peg iteration comparing the value in master to the rest of the values in guess code
             for wp in range (len (master)):
                 if master[bp] == guess[wp] and guess[wp] != 'black':
                     guess[wp] = 'white'
+                    master[wp] = 'white'
 
     # each count sends int value of each type of peg to function call
     return guess.count ('black'), guess.count ('white')
@@ -198,7 +200,7 @@ def background(gW):
 
 
  #### Far Right LINE SECTIONS ####
-def rightLines(gameW):      
+def rightLines(gameW):
         # Vertical lines
         fRvL1 = Line(Point(25,2),Point(25,26))
         fRvL1.setFill("ivory")
@@ -220,7 +222,7 @@ def rightLines(gameW):
             y+=3
             farRightHorzLines.move(0,y)
 
-            
+
 #####NUMBERS FOR FR SECTION
 def Numbers(gameWind):
 
@@ -234,7 +236,7 @@ def Numbers(gameWind):
               numbers.draw(gameWind)
               y+=3
               numbers.move(0,y)
-              
+
 
 def ballGraphs(gaWind):
           ######################################################
@@ -242,7 +244,7 @@ def ballGraphs(gaWind):
           #REFER TO THESE PIECES FOR ANY LOOP/ANMATION ACTIONS#
           #########  INVOLVING THE PIECE OF THE GAME  #########
           ########################################################
-    
+
           ## blue
           blueBall = Circle(Point(26.5,3.5),.8)
           blueBall.draw(gaWind)
@@ -323,7 +325,7 @@ def guessBoard(gameW):
     # I tried to do this with 2 seperate loops and with a nested loop, but the loops
     # made the text look weird. I was able to get it to work, but I compared it to my original
     # and my versions were both LONGER then the original.
-    
+
           EB = Circle(Point(26.5,22.5),.3)
           EB.draw(gameW)
           EB.setFill("black")
@@ -398,8 +400,8 @@ def clueBoard(window):
             if i == 1 or i == 3:
                 pegHole.move(1,0)
             if i == 2 :
-                pegHole.move(-.25,.35)                          
-        
+                pegHole.move(-.25,.35)
+
 
 #runs all the functions
 def main():
@@ -421,7 +423,7 @@ def main():
 
     # For loop set to the number of guesses a user is allowed
     for turnCount in range (10):
-        
+
         submit = createButton(gameWin)
         pegCircles = createPegs (gameWin, turnCount)
         boxes = entryBoxes (gameWin, turnCount)
