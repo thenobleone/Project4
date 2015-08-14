@@ -56,19 +56,21 @@ def ansCompare (master, guess):
     bCount = 0
     wCount = 0
 
-    #bp == black peg iteration thru list of master color list
+    # For loop to determine all blacks first!
     for bp in range (len (master)):
-        print (bp)
         if guess[bp] == master[bp]:
             master[bp] = ''
             guess[bp] = 'black'
-        else:
-            #wp == white peg iteration comparing the value in master to the rest of the values in guess code
-            for wp in range (len (master)):
-                if master[bp] == guess[wp] and guess[wp] != 'black':
-                    master[bp] = ''
-                    guess[wp] = 'white'
-                    
+
+    # Second loop to determine white pegs AFTER ensure there are no black pegs
+    #bp == black peg iteration thru list of master color list
+    for bp in range (len (master)):
+        #wp== wp peg iteration thru list of master color list
+        for wp in range (len (master)):
+            if master[bp] == guess[wp] and guess[wp] != 'black':
+                master[bp] = ''
+                guess[wp] = 'white'
+
     # each count sends int value of each type of peg to function call
     return guess.count ('black'), guess.count ('white')
 
@@ -420,7 +422,8 @@ def main():
 #    createGuessB = guessBoard(gameWin)
 #    createMastB = masterBoard()
 #    colorMasterList = masterCode ()
-    colorMasterList = ['blue', 'purple', 'purple', 'green']
+    colorMasterList = ['purple', 'orangered', 'orangered', 'red']
+    print ('orangered' == 'red')
     print (colorMasterList) #<---- this line for testing only!!!
 
     # For loop set to the number of guesses a user is allowed
