@@ -157,8 +157,6 @@ def entryBoxes (win, turn):
     # Sends a list with the circles for futher manipulation
     return entryBox
 
-
-
 # randomly creates the 4 color code to be guessed by the user
 def masterCode ():
     masterColors = []
@@ -168,8 +166,6 @@ def masterCode ():
     for i in range (4):
         masterColors.append (random.choice (colorList))
     return masterColors
-
-
 
 # Creates a submit button icon
 def createButton (win):
@@ -185,16 +181,12 @@ def createButton (win):
     submit.setFill ('dodgerblue3')
     submit.draw (win)
 
-    
-
 # creates the base window
 def createWindow ():
     win = GraphWin('Mastermind', 700, 700)
     win.setCoords(0, 0, 30, 30)
     win.setBackground('royalblue4')
     return win
-
-
 
 # BACKGROUND PICTORIAL SPACE
 def background(gW):
@@ -205,201 +197,141 @@ def background(gW):
     background.setFill("steelblue")
 
 
+ #### Far Right LINE SECTIONS ####
+def rightLines(gameW):      
+        # Vertical lines
+        fRvL1 = Line(Point(25,2),Point(25,26))
+        fRvL1.setFill("ivory")
+        fRvL1.setWidth(1)
+        fRvL1.draw(gameW)
+        fRvL2 = Line(Point(23,2),Point(23,29))
+        fRvL2.setFill("ivory")
+        fRvL2.setWidth(2.5)
+        fRvL2.draw(gameW)
+        # Horizontal Lines
+        x,y = 23,-3
+        x1, y1 = 23,5
+        x2, y2 = 28,5
+        for i in range(8):
+            farRightHorzLines = Line(Point(x1,y1),Point(x2,y2))
+            farRightHorzLines.setFill("ivory")
+            farRightHorzLines.setWidth(5)
+            farRightHorzLines.draw(gameW)
+            y+=3
+            farRightHorzLines.move(0,y)
 
-def guideKey(gWin):
-          ####HORIZONTAL LINE SECTIONS#####
-          ###FR section 1
-          s1fr = Line(Point(23,5),Point(28,5))
-          s1fr.setFill("ivory")
-          s1fr.setWidth(5)
-          s1fr.draw(gWin)
+            
+#####NUMBERS FOR FR SECTION
+def Numbers(gameWind):
 
-          ###FR section 2
-          s2fr = Line(Point(23,8),Point(28,8))
-          s2fr.setFill("ivory")
-          s2fr.setWidth(5)
-          s2fr.draw(gWin)
+          x,y = 21,-3
+          x1,y1 = 24,3.5
+          for i in range(1,9):
+              numbers = Text(Point(x1,y1),[i])
+              numbers.setFace("arial")
+              numbers.setTextColor("azure3")
+              numbers.setSize(25)
+              numbers.draw(gameWind)
+              y+=3
+              numbers.move(0,y)
+              
 
-          ###FR section 3
-          s3fr = Line(Point(23,11),Point(28,11))
-          s3fr.setFill("ivory")
-          s3fr.setWidth(5)
-          s3fr.draw(gWin)
-
-          ###FR section 4
-          s4fr = Line(Point(23,14),Point(28,14))
-          s4fr.setFill("ivory")
-          s4fr.setWidth(5)
-          s4fr.draw(gWin)
-
-          ###FR section 5
-          s5fr = Line(Point(23,17),Point(28,17))
-          s5fr.setFill("ivory")
-          s5fr.setWidth(5)
-          s5fr.draw(gWin)
-
-          ###FR section 6
-          s6fr = Line(Point(23,20),Point(28,20))
-          s6fr.setFill("ivory")
-          s6fr.setWidth(5)
-          s6fr.draw(gWin)
-
-          ###FR section 7
-          s7fr = Line(Point(23,23),Point(28,23))
-          s7fr.setFill("ivory")
-          s7fr.setWidth(5)
-          s7fr.draw(gWin)
-
-          ###FR section 8
-          s8fr = Line(Point(23,26),Point(28,26))
-          s8fr.setFill("ivory")
-          s8fr.setWidth(5)
-          s8fr.draw(gWin)
-
-          #####VERTICAL LINE SECTIONs
-
-          fRvL1 = Line(Point(25,2),Point(25,26))
-          fRvL1.setFill("ivory")
-          fRvL1.setWidth(1)
-          fRvL1.draw(gWin)
-
-          fRvL2 = Line(Point(23,2),Point(23,29))
-          fRvL2.setFill("ivory")
-          fRvL2.setWidth(2.5)
-          fRvL2.draw(gWin)
-
-          #########################
-          #####NUMBERS FOR FR SECTION
-
-          # number 1
-          t1 = Text(Point(24,3.5),'1')
-          t1.setFace("arial")
-          t1.setTextColor("azure3")
-          t1.setSize(25)
-          t1.draw(gWin)
-          # number 2
-          t2 = Text(Point(24,6.5),'2')
-          t2.setFace("arial")
-          t2.setTextColor("azure3")
-          t2.setSize(25)
-          t2.draw(gWin)
-          # number 3
-          t3 = Text(Point(24,9.5),'3')
-          t3.setFace("arial")
-          t3.setTextColor("azure3")
-          t3.setSize(25)
-          t3.draw(gWin)
-          #number 4
-          t4 = Text(Point(24,12.5),'4')
-          t4.setFace("arial")
-          t4.setTextColor("azure3")
-          t4.setSize(25)
-          t4.draw(gWin)
-          # number 5
-          t5 = Text(Point(24,15.5),'5')
-          t5.setFace("arial")
-          t5.setTextColor("azure3")
-          t5.setSize(25)
-          t5.draw(gWin)
-          # number 6
-          t6 = Text(Point(24,18.5),'6')
-          t6.setFace("arial")
-          t6.setTextColor("azure3")
-          t6.setSize(25)
-          t6.draw(gWin)
-          # number 7
-          t7 = Text(Point(24,21.5),'7')
-          t7.setFace("arial")
-          t7.setTextColor("azure3")
-          t7.setSize(25)
-          t7.draw(gWin)
-          # number 8
-          t8 = Text(Point(24,24.5),'8')
-          t8.setFace("arial")
-          t8.setTextColor("azure3")
-          t8.setSize(25)
-          t8.draw(gWin)
-
+def ballGraphs(gaWind):
           ######################################################
           #################  ROUND GAME PEGS   ################
           #REFER TO THESE PIECES FOR ANY LOOP/ANMATION ACTIONS#
           #########  INVOLVING THE PIECE OF THE GAME  #########
           ########################################################
-
+    
           ## blue
           blueBall = Circle(Point(26.5,3.5),.8)
-          blueBall.draw(gWin)
+          blueBall.draw(gaWind)
           blueBall.setFill("blue")
           blueBall.setOutline("blue")
           ## B on ball text
           Bball = Text(Point(26.5,3.5),"B")
           Bball.setSize(20)
           Bball.setFace("arial")
-          Bball.draw(gWin)
+          Bball.draw(gaWind)
 
           ## red
           redBall  = Circle(Point(26.5,6.5),.8)
-          redBall.draw(gWin)
+          redBall.draw(gaWind)
           redBall.setFill("red")
           redBall.setOutline("red")
           ##R on ball text
           Rball = Text(Point(26.5,6.5),"R")
           Rball.setSize(20)
           Rball.setFace("arial")
-          Rball.draw(gWin)
+          Rball.draw(gaWind)
 
           ## purple
           purpleBall = Circle(Point(26.5,9.5),.8)
-          purpleBall.draw(gWin)
+          purpleBall.draw(gaWind)
           purpleBall.setFill("purple")
           purpleBall.setOutline("purple")
           ##P on ball text
           Pball = Text(Point(26.5,9.5),"P")
           Pball.setSize(20)
           Pball.setFace("arial")
-          Pball.draw(gWin)
+          Pball.draw(gaWind)
 
           ## orange
           orangeBall = Circle(Point(26.5,12.5),.8)
-          orangeBall.draw(gWin)
+          orangeBall.draw(gaWind)
           orangeBall.setFill("orangered")
           orangeBall.setOutline("orange")
           ##O on ball text
           Oball = Text(Point(26.5,12.5),"O")
           Oball.setSize(20)
           Oball.setFace("arial")
-          Oball.draw(gWin)
+          Oball.draw(gaWind)
 
           ## green
           greenBall = Circle(Point(26.5,15.5),.8)
-          greenBall.draw(gWin)
+          greenBall.draw(gaWind)
           greenBall.setFill("green")
           greenBall.setOutline("green")
           ##G on ball text
           Gball = Text(Point(26.5,15.5),"G")
           Gball.setSize(20)
           Gball.setFace("arial")
-          Gball.draw(gWin)
+          Gball.draw(gaWind)
 
           ## yellow
           yellowBall = Circle(Point(26.5,18.5),.8)
-          yellowBall.draw(gWin)
+          yellowBall.draw(gaWind)
           yellowBall.setFill("yellow")
           yellowBall.setOutline("yellow")
           ##Y on ball text
           Yball = Text(Point(26.5,18.5),"Y")
           Yball.setSize(20)
           Yball.setFace("arial")
-          Yball.draw(gWin)
+          Yball.draw(gaWind)
 
+
+# Black and White pegs on Right Side of board with info.
 def guessBoard(gameW):
-          ####################################################
-          #### BLACK AND WHITE PEGS WITH EXPLAINATION ##
-          #### OF PEG MEANING ON RS   ######################
-          ####################################################
+
+    # Shannon tried to make a change: I wanted to have a list,
+    # info = ["Right Color","Right Place","Wrong Color"]
+    # and I tried to cancatinate the elements in the list to create
+    #   the phrases to explain the black and white pegs.
+    #   info[0]+ " "+info[1] for RCRP
+    #   info[0]+ " "+ info[2] for RCWP
+    ####
+    # I tried to do this with 2 seperate loops and with a nested loop, but the loops
+    # made the text look weird. I was able to get it to work, but I compared it to my original
+    # and my versions were both LONGER then the original.
+    
           EB = Circle(Point(26.5,22.5),.3)
           EB.draw(gameW)
           EB.setFill("black")
+
+          EW = Circle(Point(26.5,25.5),.3)
+          EW.draw(gameW)
+          EW.setFill("white")
+          EW.setOutline("white")
 
           ebText1 = Text(Point(26.5,21.5),"Right Color")
           ebText1.draw(gameW)
@@ -409,11 +341,6 @@ def guessBoard(gameW):
           ebText2.draw(gameW)
           ebText2.setFace("arial")
           ebText2.setSize(11)
-
-          EW = Circle(Point(26.5,25.5),.3)
-          EW.draw(gameW)
-          EW.setFill("white")
-          EW.setOutline("white")
 
           ewText3 = Text(Point(26.5,24.5),"Right Color")
           ewText3.setFace("arial")
@@ -426,83 +353,35 @@ def guessBoard(gameW):
           ewText4.draw(gameW)
           ewText4.setSize(11)
 
-          #####################################################
-          #FAR LEFT SIDE AREA WHERE BLACK AND WHITE PEGS WILL APPEAR.
-          #######FOR ANY ANIMATION/LOOPS THAT UTILIZE WHITE AND BLACK
-          ############PEGS, REFER TO THIS SECTION.
-
-          #####SECTION BOXES 1-8 : AREAS WHERE WHITE AND BLACK PEGS
-          ####### ARE STORED AS 'HINTS'
-
-          #HORIZONTAL LINE SECTIONS
-          #FL section 1
-          s1fl = Line(Point(2,5),Point(6,5))
-          s1fl.setFill("ivory")
-          s1fl.setWidth(5)
-          s1fl.draw(gameW)
-
-          #FL section 2
-          s2fl = Line(Point(2,8),Point(6,8))
-          s2fl.setFill("ivory")
-          s2fl.setWidth(5)
-          s2fl.draw(gameW)
-
-          #FL section 3
-          s3fl = Line(Point(2,11),Point(6,11))
-          s3fl.setFill("ivory")
-          s3fl.setWidth(5)
-          s3fl.draw(gameW)
-
-           #FL section 4
-          s4fl = Line(Point(2,14),Point(6,14))
-          s4fl.setFill("ivory")
-          s4fl.setWidth(5)
-          s4fl.draw(gameW)
-
-          #FL section 5
-          s5fl = Line(Point(2,17),Point(6,17))
-          s5fl.setFill("ivory")
-          s5fl.setWidth(5)
-          s5fl.draw(gameW)
-
-          #FL section 6
-          s6fl = Line(Point(2,20),Point(6,20))
-          s6fl.setFill("ivory")
-          s6fl.setWidth(5)
-          s6fl.draw(gameW)
-
-          #FL section 7
-          s7fl = Line(Point(2,23),Point(6,23))
-          s7fl.setFill("ivory")
-          s7fl.setWidth(5)
-          s7fl.draw(gameW)
-
-          #FL section 8
-          s8fl = Line(Point(2,26),Point(6,26))
-          s8fl.setFill("ivory")
-          s8fl.setWidth(5)
-          s8fl.draw(gameW)
-
-          ######VERTICAL LINE SECTION
-          vLfL = Line(Point(6,2),Point(6,29))
-          vLfL.setFill("ivory")
-          vLfL.setWidth(2.5)
-          vLfL.draw(gameW)
 
 
- 
+# FAR LEFT SIDE GRID and VERTICAL LINE
+# Fancy modular thingy!
+def leftLines(gaW):
+    vLfL = Line(Point(6,2),Point(6,29))
+    vLfL.setFill("ivory")
+    vLfL.setWidth(2.5)
+    vLfL.draw(gaW)
+
+    x,y = 2,-3
+    x1,y1 = 2,5
+    x2,y2 = 6,5
+    for i in range(9):
+          leftLines = Line(Point(2,5),Point(6,5))
+          leftLines.setFill("ivory")
+          leftLines.setWidth(5)
+          leftLines.draw(gaW)
+          y+=3
+          leftLines.move(0,y)
+
+ ##########WORK IN PROGRESS#########
+######STILL BROKEN
+# FAR LEFT SIDE 4 hole peg grid graphic
 def clueBoard(window):
-    # starting location = rectangle
     x,y = 0,-2
-    # starting location = X4 pegHole circle
     xA, yA = 3.3,3.3
-    # rectangle 
     x1,y1 = 2,4
     x2,y2 = 6,1
-   
-
-    
-    #first loop for 8 boxes
     for i in range(1,9):
         pegBox = Rectangle(Point(x1,y1),Point(x2,y2))
         pegBox.draw(window)
@@ -519,13 +398,8 @@ def clueBoard(window):
             if i == 1 or i == 3:
                 pegHole.move(1,0)
             if i == 2 :
-                pegHole.move(-.25,.35)
-
+                pegHole.move(-.25,.35)                          
         
-            
-                           
-            
-          
 
 #runs all the functions
 def main():
@@ -534,16 +408,20 @@ def main():
     gameWin = createWindow ()
     #functions for graphics
     createBackB = background(gameWin)
-    createGuideB = guideKey(gameWin)
-    #createGuessB = guessBoard(gameWin)
-    
+    createRightLineGrid = rightLines(gameWin)
+    createLeftLineGrid = leftLines(gameWin)
+    createNumbers = Numbers(gameWin)
+ #   createClue = clueBoard(gameWin) ### WORK IN PROGRESS
+    createBalls = ballGraphs(gameWin)
+    createInfo = guessBoard(gameWin)
+#    createGuessB = guessBoard(gameWin)
 #    createMastB = masterBoard()
     colorMasterList = masterCode ()
     print (colorMasterList) #<---- this line for testing only!!!
 
     # For loop set to the number of guesses a user is allowed
     for turnCount in range (10):
-        createClue = clueBoard(gameWin)
+        
         submit = createButton(gameWin)
         pegCircles = createPegs (gameWin, turnCount)
         boxes = entryBoxes (gameWin, turnCount)
