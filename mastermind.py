@@ -60,13 +60,13 @@ def ansCompare (master, guess):
     for bp in range (len (master)):
         if guess[bp] == master[bp]:
             guess[bp] = 'black'
-            master[bp] = 'black'
+            master[bp] = ''
         else:
             #wp == white peg iteration comparing the value in master to the rest of the values in guess code
             for wp in range (len (master)):
                 if master[bp] == guess[wp] and guess[wp] != 'black':
                     guess[wp] = 'white'
-                    master[wp] = 'white'
+                    master[wp] = ''
 
     # each count sends int value of each type of peg to function call
     return guess.count ('black'), guess.count ('white')
