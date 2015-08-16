@@ -1,5 +1,5 @@
 # mastermindJS.py
-# Created by Jo Narvaez-Jesen & Shannon Poehlemn
+# Created by Jo Narvaez-Jesen & Shannon Poehlman
 
 # Program design to recreate the game Mastermind with a GUI interface
 
