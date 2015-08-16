@@ -7,9 +7,23 @@ from graphics import *
 import random
 from button import Button
 
+def quitGame(ndow):
+    quitButton = Button(ndow,Point(3,1),6,2, "Quit")
+    quitButton.activate()
+    pt = ndow.getMouse()
+    if quitButton.clicked(pt):
+            ndow.close()
+
+def submitButton(win):
+    submit = Button(win,Point(14.5,1),17,2, "Submit Your Answer")
+    submit.activate()
+    pt = win.getMouse()
+    if submit.clicked(pt):
+        return submit
+
 # Graphic that 'hides' the mastercode from the user at the top of the board.
 #       note: This is only a graphic to give the impression that the colors
-#       are 'hidden'. 
+#       are 'hidden'.
 def masterBoard(g):
     hideMasterKey = Oval(Point(6,26),Point(23,29))
     hideMasterKey.draw(g)
@@ -237,102 +251,50 @@ def Numbers(gameWind):
 # Colorful ball game key with letters to indicate which letter represents
 #       which color.
 def ballGraphs(gaWind):
+    colorGuide = [['blue', 'B'], ['green', 'G'], ['orangered', 'O'], ['purple', 'P'], ['red', 'R'], ['yellow', 'Y']]
+    x, y = 26.6, 3.5
 
-          ## blue
-          blueBall = Circle(Point(26.6,3.5),.8)
-          blueBall.draw(gaWind)
-          blueBall.setFill("blue")
-          blueBall.setOutline("blue")
-          ## B on ball text
-          Bball = Text(Point(26.6,3.5),"B")
-          Bball.setSize(20)
-          Bball.setFace("arial")
-          Bball.draw(gaWind)
-
-          ## red
-          redBall  = Circle(Point(26.6,6.5),.8)
-          redBall.draw(gaWind)
-          redBall.setFill("red")
-          redBall.setOutline("red")
-          ##R on ball text
-          Rball = Text(Point(26.6,6.5),"R")
-          Rball.setSize(20)
-          Rball.setFace("arial")
-          Rball.draw(gaWind)
-
-          ## purple
-          purpleBall = Circle(Point(26.6,9.5),.8)
-          purpleBall.draw(gaWind)
-          purpleBall.setFill("purple")
-          purpleBall.setOutline("purple")
-          ##P on ball text
-          Pball = Text(Point(26.6,9.5),"P")
-          Pball.setSize(20)
-          Pball.setFace("arial")
-          Pball.draw(gaWind)
-
-          ## orange
-          orangeBall = Circle(Point(26.6,12.5),.8)
-          orangeBall.draw(gaWind)
-          orangeBall.setFill("orangered")
-          orangeBall.setOutline("orange")
-          ##O on ball text
-          Oball = Text(Point(26.6,12.5),"O")
-          Oball.setSize(20)
-          Oball.setFace("arial")
-          Oball.draw(gaWind)
-
-          ## green
-          greenBall = Circle(Point(26.6,15.5),.8)
-          greenBall.draw(gaWind)
-          greenBall.setFill("green")
-          greenBall.setOutline("green")
-          ##G on ball text
-          Gball = Text(Point(26.6,15.5),"G")
-          Gball.setSize(20)
-          Gball.setFace("arial")
-          Gball.draw(gaWind)
-
-          ## yellow
-          yellowBall = Circle(Point(26.6,18.5),.8)
-          yellowBall.draw(gaWind)
-          yellowBall.setFill("yellow")
-          yellowBall.setOutline("yellow")
-          ##Y on ball text
-          Yball = Text(Point(26.6,18.5),"Y")
-          Yball.setSize(20)
-          Yball.setFace("arial")
-          Yball.draw(gaWind)
+    for c in range (len (colorGuide)):
+        kBall = Circle (Point (x, y), .8)
+        kText = Text (Point (x, y), '')
+        kText.setSize(20)
+        kText.setFace("arial")
+        kBall.draw (gaWin)
+        kBall.setFill (colorGuide[c][0])
+        kBall.setOutline (colorGuide[c][0])
+        kText.setText (colorGuide[c][1])
+        kText.draw(gaWin)
+        y += 3
 
 
 # Black and White pegs on Right Side of board with info.
 def info(gameW):
 # just clone it and move it!
-          infoList = ["Right Color","Right Place", "Wrong Color"]
-          EB = Circle(Point(26.5,22.25),.3)
-          EB.draw(gameW)
-          EB.setFill("black")
+    infoList = ["Right Color","Right Place", "Wrong Color"]
+    EB = Circle(Point(26.5,22.25),.3)
+    EB.draw(gameW)
+    EB.setFill("black")
 
-          EW = Circle(Point(26.5,25.25),.3)
-          EW.draw(gameW)
-          EW.setFill("white")
-          EW.setOutline("white")
+    EW = Circle(Point(26.5,25.25),.3)
+    EW.draw(gameW)
+    EW.setFill("white")
+    EW.setOutline("white")
 
-          ebText1 = Text(Point(26.5,21),infoList[0]+"\n"+infoList[1])
-          ebText1.draw(gameW)
-          ebText1.setFace("arial")
-          ebText1.setSize(11)
+    ebText1 = Text(Point(26.5,21),infoList[0]+"\n"+infoList[1])
+    ebText1.draw(gameW)
+    ebText1.setFace("arial")
+    ebText1.setSize(11)
 
-          ewText2 = Text(Point(26.5,24),infoList[0]+"\n"+infoList[2])
-          ewText2.setFace("arial")
-          ewText2.setTextColor("white")
-          ewText2.draw(gameW)
-          ewText2.setSize(11)
+    ewText2 = Text(Point(26.5,24),infoList[0]+"\n"+infoList[2])
+    ewText2.setFace("arial")
+    ewText2.setTextColor("white")
+    ewText2.draw(gameW)
+    ewText2.setSize(11)
 
 
 # FAR LEFT SIDE GRID and VERTICAL LINES
 def leftLines(gaW):
-    # Vertical Lines on Far left 
+    # Vertical Lines on Far left
     vLfL = Line(Point(6,2),Point(6,29))
     vLfL.setFill("ivory")
     vLfL.setWidth(2.5)
@@ -341,12 +303,12 @@ def leftLines(gaW):
     x1,y1 = 2,5
     x2,y2 = 6,5
     for i in range(8):
-          leftLines = Line(Point(2,5),Point(6,5))
-          leftLines.setFill("ivory")
-          leftLines.setWidth(5)
-          leftLines.draw(gaW)
-          y+=3
-          leftLines.move(0,y)
+        leftLines = Line(Point(2,5),Point(6,5))
+        leftLines.setFill("ivory")
+        leftLines.setWidth(5)
+        leftLines.draw(gaW)
+        y+=3
+        leftLines.move(0,y)
 
 # FAR LEFT SIDE-- 4 hole GREY CLUE peg grid graphic
 def cluePegBoard(window):
@@ -383,8 +345,7 @@ def guessBoard(gam):
         y1+=3
     return board
 
-
-# Horizontal CENTER guess pegs - graphics only- 
+# Horizontal CENTER guess pegs - graphics only-
 def GuessBoard2(w,v):
     x,y= 12.5, 6.5
     x1 = 0
@@ -400,13 +361,6 @@ def GuessBoard2(w,v):
         y = y+3
         x1 = x1 - x1
 
-# Creates the base window
-def createWindow ():
-    win = GraphWin('Mastermind', 700, 700)
-    win.setCoords(0, 0, 30, 30)
-    win.setBackground('royalblue4')
-    return win
-
 # BACKGROUND PICTORIAL SPACE
 def background(gW):
     background = Rectangle(Point(2,29),Point(28,2))
@@ -415,19 +369,12 @@ def background(gW):
     background.draw(gW)
     background.setFill("steelblue")
 
-def quitGame(ndow):
-    quitButton = Button(ndow,Point(3,1),6,2, "Quit")
-    quitButton.activate()
-    pt = ndow.getMouse()
-    if quitButton.clicked(pt):
-            ndow.close()
-
-def submitButton(win):
-    submit = Button(win,Point(14.5,1),17,2, "Submit Your Answer")
-    submit.activate()
-    pt = win.getMouse()
-    if submit.clicked(pt):
-        return submit
+# Creates the base window
+def createWindow ():
+    win = GraphWin('Mastermind', 700, 700)
+    win.setCoords(0, 0, 30, 30)
+    win.setBackground('royalblue4')
+    return win
 
 #runs all the functions
 def main():
@@ -435,13 +382,15 @@ def main():
     turnCount = 0
     gameWin = createWindow ()
     #functions for graphics
-    createBack = background(gameWin)
-    createRightLineGrid = rightLines(gameWin)
-    createLeftLineGrid = leftLines(gameWin)
-    createInfo = info(gameWin)
-    createNumbers = Numbers(gameWin)
-    createClue = cluePegBoard(gameWin)
-    createBalls = ballGraphs(gameWin)
+    background(gameWin)
+    rightLines(gameWin)
+    leftLines(gameWin)
+    info(gameWin)
+    Numbers(gameWin)
+    cluePegBoard(gameWin)
+    ballGraphics(gameWin)
+
+    #createBalls = ballGraphs(gameWin)
     middleVertical = guessBoard(gameWin)
     middleHorz = GuessBoard2(gameWin,middleVertical)
     hideMaster = masterBoard(gameWin)
@@ -449,11 +398,11 @@ def main():
  #   createQuit = quitGame(gameWin) <------------#### NEEDS WORK
 #    submit = submitButton(gameWin)< ----------- ### NEEDS WORK
 
-    
-   
+
+
     print (colorMasterList) #<---- this line for testing only!!!
         #    For loop set to the number of guesses a user is allowed
-    for turnCount in range (10):
+    for turnCount in range (8):
         submit = createButton(gameWin)
         pegCircles = createPegs (gameWin, turnCount)
         boxes = entryBoxes (gameWin, turnCount)
@@ -477,7 +426,7 @@ def main():
             break
         else:
             drawPegs (bPeg, wPeg, pegCircles, gameWin)
-    
-  
+
+
 
 main()
