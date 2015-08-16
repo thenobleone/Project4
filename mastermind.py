@@ -1,5 +1,5 @@
 # mastermindJS.py
-# Created by Jo Narvaez-Jesen & Shannon Poehlemn
+# Created by Jo Narvaez-Jesen & Shannon Poehlman
 
 # Program design to recreate the game Mastermind with a GUI interface
 
@@ -269,7 +269,6 @@ def ballGraphics(gaWin):
 
 # Black and White pegs on Right Side of board with info.
 def info(gameW):
-# just clone it and move it!
     infoList = ["Right Color","Right Place", "Wrong Color"]
     EB = Circle(Point(26.5,22.25),.3)
     EB.draw(gameW)
@@ -310,7 +309,7 @@ def leftLines(gaW):
         y+=3
         leftLines.move(0,y)
 
-# FAR LEFT SIDE-- 4 hole GREY CLUE peg grid graphic
+# FAR LEFT SIDE-- 4 hole GREY CLUE graphic drawn in vertically.
 def cluePegBoard(window):
     x,y = 0,-2
     xA, yA = 3.4,5.83
