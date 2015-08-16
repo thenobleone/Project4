@@ -179,6 +179,8 @@ def masterCode ():
     return masterColors
 
 # Creates a submit button icon
+###################################
+### NOT IN USE AT THIS TIME ####
 def createButton (win):
     subButton = Rectangle (Point (6, 1.75), Point (23, .25))
     subButton.setFill ('azure')
@@ -191,8 +193,6 @@ def createButton (win):
     submit.setFace("arial")
     submit.setFill ('dodgerblue3')
     submit.draw (win)
-
-
 
 
  #### Far Right LINE SECTIONS ####
@@ -446,23 +446,23 @@ def main():
     middleHorz = GuessBoard2(gameWin,middleVertical)
     hideMaster = masterBoard(gameWin)
     colorMasterList = masterCode ()
-    createQuit = quitGame(gameWin)
-    submit = submitButton(gameWin)
+ #   createQuit = quitGame(gameWin) <------------#### NEEDS WORK
+#    submit = submitButton(gameWin)< ----------- ### NEEDS WORK
 
     
    
     print (colorMasterList) #<---- this line for testing only!!!
         #    For loop set to the number of guesses a user is allowed
     for turnCount in range (10):
- #       submit = createButton(gameWin)
+        submit = createButton(gameWin)
         pegCircles = createPegs (gameWin, turnCount)
         boxes = entryBoxes (gameWin, turnCount)
         guess = getGuess (gameWin, boxes)
         colorGuessList = colorConvert (guess, gameWin, turnCount)
         drawGuess (gameWin, boxes, turnCount, colorGuessList)
         bPeg, wPeg = ansCompare (list (colorMasterList), list (colorGuessList))
-        createQuit = quitGame(gameWin)
-        submit = submitButton(gameWin)
+ #       createQuit = quitGame(gameWin) < -------- NEEDS WORK
+#        submit = submitButton(gameWin)<----------NEEDS WORK
 
         # The decision tree determines whether the user has won, loss, or has another round of guessing
         if bPeg == 4:
