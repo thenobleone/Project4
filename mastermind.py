@@ -250,7 +250,7 @@ def Numbers(gameWind):
 
 # Colorful ball game key with letters to indicate which letter represents
 #       which color.
-def ballGraphs(gaWind):
+def ballGraphics(gaWin):
     colorGuide = [['blue', 'B'], ['green', 'G'], ['orangered', 'O'], ['purple', 'P'], ['red', 'R'], ['yellow', 'Y']]
     x, y = 26.6, 3.5
 
