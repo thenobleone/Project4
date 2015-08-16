@@ -5,11 +5,23 @@
 
 from graphics import *
 import random
+from button import Button
+
+# Graphic that 'hides' the mastercode from the user at the top of the board.
+#       note: This is only a graphic to give the impression that the colors
+#       are 'hidden'. 
+def masterBoard(g):
+    hideMasterKey = Oval(Point(6,26),Point(23,29))
+    hideMasterKey.draw(g)
+    hideMasterKey.setFill("steelblue3")
+    hideMasterKey.setWidth(3)
+    hideMasterKey.setOutline("ivory")
+    return hideMasterKey
 
 def revealSolution (master, win):
     # Sets the base x and y coordinate values, uses the turn count to increase the y value so that it's on a newline
     mColor = [None] * 4
-    x, y = 8.5, 28
+    x, y = 8.5, 27.9
 
     for i in range (len (master)):
         mColor[i] = Circle (Point (x, y), .75)
@@ -21,16 +33,14 @@ def revealSolution (master, win):
 def finishedCondition (score, win):
 
     popUp = Rectangle (Point (6,27), Point (23, 26))
-    popUp.setFill("black")
     popUp.draw (win)
 
     message = Text (Point (15, 26.56), "")
     message.setFace("arial")
     message.setSize (20)
-    message.setTextColor ("navy")
 
     if score == 'victory':
-        message.setText ("!! Congrats You Win !!")
+        message.setText ("!! Congratulations, You Win !!")
         message.setTextColor("yellow")
         popUp.setFill("navy")
         message.draw (win)
@@ -84,7 +94,7 @@ def drawGuess (win, boxes, turn, color):
     # Draws 4 circles
     for i in range (len (boxes)):
         boxes[i].undraw ()
-        guessDot = Circle (Point (x,y), .80)
+        guessDot = Circle (Point (x,y), .75)
         guessDot.setFill (color[i])
         guessDot.setOutline("azure")
         guessDot.draw (win)
@@ -143,22 +153,19 @@ def createPegs (win, turn):
 
 # Draws and creates entry boxes and sets them to a list that is returned to main
 def entryBoxes (win, turn):
-    # ENTRY BOXES
     # Sets the base x and y coordinate values, uses the turn count to increase the y value so that it's on a newline
     entryBox = [None] * 4
     x, y = 8.5, 3.5
     if turn > 0:
         y = y + (3 * turn)
-
     # Creates 4 entry boxes for the user's guesses
     for i in range (4):
-        entryBox[i] = Entry (Point (x, y), 4)
-        entryBox[i].setSize(17)
+        entryBox[i] = Entry (Point (x, y), 3)
+        entryBox[i].setSize(22)
         entryBox[i].setFill("azure")
         entryBox[i].setText ('')
         entryBox[i].draw (win)
         x += 4
-
     # Sends a list with the circles for futher manipulation
     return entryBox
 
@@ -166,7 +173,6 @@ def entryBoxes (win, turn):
 def masterCode ():
     masterColors = []
     colorList = ['blue', 'green', 'orangered', 'purple', 'red', 'yellow']
-
     # Creates a list of 4 random colors to be used as the master code for the user to guess
     for i in range (4):
         masterColors.append (random.choice (colorList))
@@ -186,20 +192,7 @@ def createButton (win):
     submit.setFill ('dodgerblue3')
     submit.draw (win)
 
-# creates the base window
-def createWindow ():
-    win = GraphWin('Mastermind', 700, 700)
-    win.setCoords(0, 0, 30, 30)
-    win.setBackground('royalblue4')
-    return win
 
-# BACKGROUND PICTORIAL SPACE
-def background(gW):
-    background = Rectangle(Point(2,29),Point(28,2))
-    background.setWidth(5)
-    background.setOutline("ivory3")
-    background.draw(gW)
-    background.setFill("steelblue")
 
 
  #### Far Right LINE SECTIONS ####
@@ -217,6 +210,7 @@ def rightLines(gameW):
         x,y = 23,-3
         x1, y1 = 23,5
         x2, y2 = 28,5
+        # Loop the creates lines on far right side
         for i in range(8):
             farRightHorzLines = Line(Point(x1,y1),Point(x2,y2))
             farRightHorzLines.setFill("ivory")
@@ -228,9 +222,9 @@ def rightLines(gameW):
 
 #####NUMBERS FOR FR SECTION
 def Numbers(gameWind):
-
           x,y = 21,-3
           x1,y1 = 24,3.5
+          # loop to generate numbers on right side of board
           for i in range(1,9):
               numbers = Text(Point(x1,y1),[i])
               numbers.setFace("arial")
@@ -240,138 +234,113 @@ def Numbers(gameWind):
               y+=3
               numbers.move(0,y)
 
-
+# Colorful ball game key with letters to indicate which letter represents
+#       which color.
 def ballGraphs(gaWind):
-          ######################################################
-          #################  ROUND GAME PEGS   ################
-          #REFER TO THESE PIECES FOR ANY LOOP/ANMATION ACTIONS#
-          #########  INVOLVING THE PIECE OF THE GAME  #########
-          ########################################################
 
           ## blue
-          blueBall = Circle(Point(26.5,3.5),.8)
+          blueBall = Circle(Point(26.6,3.5),.8)
           blueBall.draw(gaWind)
           blueBall.setFill("blue")
           blueBall.setOutline("blue")
           ## B on ball text
-          Bball = Text(Point(26.5,3.5),"B")
+          Bball = Text(Point(26.6,3.5),"B")
           Bball.setSize(20)
           Bball.setFace("arial")
           Bball.draw(gaWind)
 
           ## red
-          redBall  = Circle(Point(26.5,6.5),.8)
+          redBall  = Circle(Point(26.6,6.5),.8)
           redBall.draw(gaWind)
           redBall.setFill("red")
           redBall.setOutline("red")
           ##R on ball text
-          Rball = Text(Point(26.5,6.5),"R")
+          Rball = Text(Point(26.6,6.5),"R")
           Rball.setSize(20)
           Rball.setFace("arial")
           Rball.draw(gaWind)
 
           ## purple
-          purpleBall = Circle(Point(26.5,9.5),.8)
+          purpleBall = Circle(Point(26.6,9.5),.8)
           purpleBall.draw(gaWind)
           purpleBall.setFill("purple")
           purpleBall.setOutline("purple")
           ##P on ball text
-          Pball = Text(Point(26.5,9.5),"P")
+          Pball = Text(Point(26.6,9.5),"P")
           Pball.setSize(20)
           Pball.setFace("arial")
           Pball.draw(gaWind)
 
           ## orange
-          orangeBall = Circle(Point(26.5,12.5),.8)
+          orangeBall = Circle(Point(26.6,12.5),.8)
           orangeBall.draw(gaWind)
           orangeBall.setFill("orangered")
           orangeBall.setOutline("orange")
           ##O on ball text
-          Oball = Text(Point(26.5,12.5),"O")
+          Oball = Text(Point(26.6,12.5),"O")
           Oball.setSize(20)
           Oball.setFace("arial")
           Oball.draw(gaWind)
 
           ## green
-          greenBall = Circle(Point(26.5,15.5),.8)
+          greenBall = Circle(Point(26.6,15.5),.8)
           greenBall.draw(gaWind)
           greenBall.setFill("green")
           greenBall.setOutline("green")
           ##G on ball text
-          Gball = Text(Point(26.5,15.5),"G")
+          Gball = Text(Point(26.6,15.5),"G")
           Gball.setSize(20)
           Gball.setFace("arial")
           Gball.draw(gaWind)
 
           ## yellow
-          yellowBall = Circle(Point(26.5,18.5),.8)
+          yellowBall = Circle(Point(26.6,18.5),.8)
           yellowBall.draw(gaWind)
           yellowBall.setFill("yellow")
           yellowBall.setOutline("yellow")
           ##Y on ball text
-          Yball = Text(Point(26.5,18.5),"Y")
+          Yball = Text(Point(26.6,18.5),"Y")
           Yball.setSize(20)
           Yball.setFace("arial")
           Yball.draw(gaWind)
 
 
 # Black and White pegs on Right Side of board with info.
-def guessBoard(gameW):
-
-    # Shannon tried to make a change: I wanted to have a list,
-    # info = ["Right Color","Right Place","Wrong Color"]
-    # and I tried to cancatinate the elements in the list to create
-    #   the phrases to explain the black and white pegs.
-    #   info[0]+ " "+info[1] for RCRP
-    #   info[0]+ " "+ info[2] for RCWP
-    ####
-    # I tried to do this with 2 seperate loops and with a nested loop, but the loops
-    # made the text look weird. I was able to get it to work, but I compared it to my original
-    # and my versions were both LONGER then the original.
-
-          EB = Circle(Point(26.5,22.5),.3)
+def info(gameW):
+# just clone it and move it!
+          infoList = ["Right Color","Right Place", "Wrong Color"]
+          EB = Circle(Point(26.5,22.25),.3)
           EB.draw(gameW)
           EB.setFill("black")
 
-          EW = Circle(Point(26.5,25.5),.3)
+          EW = Circle(Point(26.5,25.25),.3)
           EW.draw(gameW)
           EW.setFill("white")
           EW.setOutline("white")
 
-          ebText1 = Text(Point(26.5,21.5),"Right Color")
+          ebText1 = Text(Point(26.5,21),infoList[0]+"\n"+infoList[1])
           ebText1.draw(gameW)
           ebText1.setFace("arial")
           ebText1.setSize(11)
-          ebText2 = Text(Point(26.5,20.5),"Right Place")
-          ebText2.draw(gameW)
-          ebText2.setFace("arial")
-          ebText2.setSize(11)
 
-          ewText3 = Text(Point(26.5,24.5),"Right Color")
-          ewText3.setFace("arial")
-          ewText3.setTextColor("white")
-          ewText3.draw(gameW)
-          ewText3.setSize(11)
-          ewText4 = Text(Point(26.5,23.5),"Wrong Place")
-          ewText4.setFace("arial")
-          ewText4.setTextColor("white")
-          ewText4.draw(gameW)
-          ewText4.setSize(11)
+          ewText2 = Text(Point(26.5,24),infoList[0]+"\n"+infoList[2])
+          ewText2.setFace("arial")
+          ewText2.setTextColor("white")
+          ewText2.draw(gameW)
+          ewText2.setSize(11)
 
 
-
-# FAR LEFT SIDE GRID and VERTICAL LINE
-# Fancy modular thingy!
+# FAR LEFT SIDE GRID and VERTICAL LINES
 def leftLines(gaW):
+    # Vertical Lines on Far left 
     vLfL = Line(Point(6,2),Point(6,29))
     vLfL.setFill("ivory")
     vLfL.setWidth(2.5)
     vLfL.draw(gaW)
-
     x,y = 2,-3
     x1,y1 = 2,5
     x2,y2 = 6,5
-    for i in range(9):
+    for i in range(8):
           leftLines = Line(Point(2,5),Point(6,5))
           leftLines.setFill("ivory")
           leftLines.setWidth(5)
@@ -379,32 +348,86 @@ def leftLines(gaW):
           y+=3
           leftLines.move(0,y)
 
- ##########WORK IN PROGRESS#########
-######STILL BROKEN
-# FAR LEFT SIDE 4 hole peg grid graphic
-def clueBoard(window):
+# FAR LEFT SIDE-- 4 hole GREY CLUE peg grid graphic
+def cluePegBoard(window):
     x,y = 0,-2
-    xA, yA = 3.3,3.3
+    xA, yA = 3.4,5.83
     x1,y1 = 2,4
-    x2,y2 = 6,1
-    for i in range(1,9):
-        pegBox = Rectangle(Point(x1,y1),Point(x2,y2))
-        pegBox.draw(window)
-        pegBox.setOutline("ivory")
-        pegBox.setWidth(3)
-        y+=3
-        pegBox.move(0,y)
+    x2,y2 = 6,7
+    for i in range(1,8):
         for i in range(4):
             pegHole = Circle(Point(xA,yA),.5)
             pegHole.draw(window)
             pegHole.setFill("azure4")
             pegHole.setOutline("azure")
-            yA+=.70
             if i == 1 or i == 3:
-                pegHole.move(1,0)
-            if i == 2 :
-                pegHole.move(-.25,.35)
+                pegHole.move(1.25,0)
+            if i == 2 or i == 3:
+                pegHole.move(0,1.25)
+        y+=3
+        yA+=3
 
+#######################################################
+# guessBoard and GuessBoard2 draw the circle graphics in the middle
+#       of the board.
+# Vertical CENTER guess pegs on far left side- graphics only
+def guessBoard(gam):
+    x,y = 8.5,5.5
+    y1,x1 = 1,1
+    for i in range(7):
+        board = Circle(Point(x,y),.75)
+        board.draw(gam)
+        board.setFill("azure3")
+        board.setOutline("ivory")
+        board.move(0,y1)
+        y1+=3
+    return board
+
+
+# Horizontal CENTER guess pegs - graphics only- 
+def GuessBoard2(w,v):
+    x,y= 12.5, 6.5
+    x1 = 0
+    for i in range(7):
+        for i in range(3):
+            boardH = Circle(Point(x,y),.75)
+            boardH.draw(w)
+            boardH.setFill("azure3")
+            boardH.setOutline("ivory")
+            boardH.clone()
+            boardH.move(x1,0)
+            x1+=4
+        y = y+3
+        x1 = x1 - x1
+
+# Creates the base window
+def createWindow ():
+    win = GraphWin('Mastermind', 700, 700)
+    win.setCoords(0, 0, 30, 30)
+    win.setBackground('royalblue4')
+    return win
+
+# BACKGROUND PICTORIAL SPACE
+def background(gW):
+    background = Rectangle(Point(2,29),Point(28,2))
+    background.setWidth(5)
+    background.setOutline("ivory3")
+    background.draw(gW)
+    background.setFill("steelblue")
+
+def quitGame(ndow):
+    quitButton = Button(ndow,Point(3,1),6,2, "Quit")
+    quitButton.activate()
+    pt = ndow.getMouse()
+    if quitButton.clicked(pt):
+            ndow.close()
+
+def submitButton(win):
+    submit = Button(win,Point(14.5,1),17,2, "Submit Your Answer")
+    submit.activate()
+    pt = win.getMouse()
+    if submit.clicked(pt):
+        return submit
 
 #runs all the functions
 def main():
@@ -412,40 +435,49 @@ def main():
     turnCount = 0
     gameWin = createWindow ()
     #functions for graphics
-    createBackB = background(gameWin)
+    createBack = background(gameWin)
     createRightLineGrid = rightLines(gameWin)
     createLeftLineGrid = leftLines(gameWin)
+    createInfo = info(gameWin)
     createNumbers = Numbers(gameWin)
- #   createClue = clueBoard(gameWin) ### WORK IN PROGRESS
+    createClue = cluePegBoard(gameWin)
     createBalls = ballGraphs(gameWin)
-    createInfo = guessBoard(gameWin)
-#    createGuessB = guessBoard(gameWin)
-#    createMastB = masterBoard()
-#    colorMasterList = masterCode ()
-    colorMasterList = ['purple', 'orangered', 'orangered', 'red']
-    print ('orangered' == 'red')
+    middleVertical = guessBoard(gameWin)
+    middleHorz = GuessBoard2(gameWin,middleVertical)
+    hideMaster = masterBoard(gameWin)
+    colorMasterList = masterCode ()
+    createQuit = quitGame(gameWin)
+    submit = submitButton(gameWin)
+
+    
+   
     print (colorMasterList) #<---- this line for testing only!!!
-
-    # For loop set to the number of guesses a user is allowed
+        #    For loop set to the number of guesses a user is allowed
     for turnCount in range (10):
-
-        submit = createButton(gameWin)
+ #       submit = createButton(gameWin)
         pegCircles = createPegs (gameWin, turnCount)
         boxes = entryBoxes (gameWin, turnCount)
         guess = getGuess (gameWin, boxes)
         colorGuessList = colorConvert (guess, gameWin, turnCount)
         drawGuess (gameWin, boxes, turnCount, colorGuessList)
         bPeg, wPeg = ansCompare (list (colorMasterList), list (colorGuessList))
+        createQuit = quitGame(gameWin)
+        submit = submitButton(gameWin)
 
-    # The decision tree determines whether the user has won, loss, or has another round of guessing
+        # The decision tree determines whether the user has won, loss, or has another round of guessing
         if bPeg == 4:
+            hideMaster.undraw()
             revealSolution (list (colorMasterList), gameWin)
             result = finishedCondition ('victory', gameWin)
             break
         elif turnCount == 7:
+            hideMaster.undraw()
+            revealSolution (list (colorMasterList), gameWin)
             result = finishedCondition ('lost', gameWin)
             break
         else:
             drawPegs (bPeg, wPeg, pegCircles, gameWin)
+    
+  
 
 main()
