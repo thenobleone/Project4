@@ -34,15 +34,6 @@ def results (order, winner, gWin):
     playAgain = Text (Point (4, 2.5), "Press Any to Key To Continue\nClick to Close")
     playAgain.draw (gWin)
 
-
-    if gWin.getMouse ():
-        gWin.close ()
-    elif gWin.getKey ():
-        clearFeature (playAgain)
-        clearFeature (WinBox)
-        clearFeature (winMessage)
-        return ''
-
 def whoWon (brd, move, gWin):
     winLine = {
         'd1' : Line (Point (.15, .15), Point (5.85, 5.85)),
@@ -84,7 +75,7 @@ def whoWon (brd, move, gWin):
         winLine['v3'].draw (gWin)
         return move
     else:
-        return '', winLine
+        return ''
 
 def fullSqr ():
     print ("That piece has already been taken! Try again.")
