@@ -34,6 +34,15 @@ def results (order, winner, gWin):
     playAgain = Text (Point (4, 2.5), "Press Any to Key To Continue\nClick to Close")
     playAgain.draw (gWin)
 
+    if gWin.getKey ():
+        clearFeature (playAgain)
+        clearFeature (WinBox)
+        clearFeature (winMessage)
+
+        return ''
+    elif gWin.getMouse ():
+        gWin.close ()
+
 def whoWon (brd, move, gWin):
     winLine = {
         'd1' : Line (Point (.15, .15), Point (5.85, 5.85)),
@@ -269,6 +278,7 @@ def startScreen (window):
     i = 0
     for n in nameField:
         playerName.append (nameField[i].getText())
+        i+= 1
 
     clearFeature (nameField)
     clearFeature (startScreen)
