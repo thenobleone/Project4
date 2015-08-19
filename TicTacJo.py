@@ -1,5 +1,5 @@
 # Tic-Tac-Jo.py
-# Created by Jo Narvaez-Jensen & Shannon Poehlemn
+# Created by Jo Narvaez-Jensen & Shannon Poehlman
 
 # Tic Tac Toe GUI python game
 
@@ -11,38 +11,54 @@
 
 from graphics import *
 import random
+from button import Button
 
-def results (order, winner, gWin):
+def results (order, winner, gWin):#######
+    #status has transfered as 'winner'
     if winner == 'x':
         wPlayer = order[0]
     else:
         wPlayer = order[1]  #3, 4
 
-    WinBox = Rectangle (Point (2.5, 2.5), Point (4.5, 4.5))
-    WinBox.setFill ('lightslateblue')
+    WinBox = Rectangle (Point (2, 4), Point (4, 2))
+    WinBox.setFill ('navy')
     WinBox.setOutline ('black')
     WinBox.setWidth (3)
     WinBox.draw (gWin)
 
-    winMessage = Text (Point (4, 3), "{0} wins!".format(wPlayer))
+    winMessage = Text (Point (3, 3), "{0} wins!".format(wPlayer))
     winMessage.setFace ('arial')
-    winMessage.setFill ('dodgerblue')
+    winMessage.setFill ('white')
     winMessage.setOutline ('steelblue')
-    winMessage.setSize (25)
+    winMessage.setSize (18)
     winMessage.draw (gWin)
 
-    playAgain = Text (Point (4, 2.5), "Press Any to Key To Continue\nClick to Close")
+    playAgain = Text (Point (3, 2.5), "Press <ENTER> To Play Again\nOr Click Window to Close")#
+    playAgain.setTextColor("white")
+    playAgain.setSize(12)
+    playAgain.setStyle("bold")
     playAgain.draw (gWin)
-
-    if gWin.getKey ():
-        clearFeature (playAgain)
-        clearFeature (WinBox)
-        clearFeature (winMessage)
-
+    
+    ############################
+    #Would a While loop work better here?
+    if gWin.getKey():#
+        for i in range(1):######
+           winMessage.undraw()#
+           WinBox.undraw()#
+           playAgain.undraw()#
+           #Game pieces need to be cleared. Only the messages are being cleared at this time.
+           #Previous players names need to be cleared. Right now names are just writing over other names.
+           clearFeature (gamePieces)# does not clear the game pieces.
+           
         return ''
-    elif gWin.getMouse ():
-        gWin.close ()
+    ######################################
+    elif gWin.getMouse():######
+        #does not close the window at this time.
+        gWin.close ()#######
 
+def quitButton(wind):
+    quitButton = Button(wind,Point(
+    
 def whoWon (brd, move, gWin):
     winLine = {
         'd1' : Line (Point (.15, .15), Point (5.85, 5.85)),
@@ -85,10 +101,10 @@ def whoWon (brd, move, gWin):
         return move
     else:
         return ''
-
-def fullSqr ():
-    print ("That piece has already been taken! Try again.")
-
+######################################################
+#def fullSqr (w):
+#    print ("That place has already been taken! Try again.")
+####################################################
 def runGame (xP, oP, gWin):
     turn = 1
     board = [None] * 9
@@ -138,8 +154,22 @@ def runGame (xP, oP, gWin):
                         board[loc[4]] = move
                         gridLoc[sqr] = ''
                     else:
+                        ###########
                         print (sqr)
-                        fullSqr ()
+                        for i in range(1):
+                            sorry = Rectangle (Point(0,4),Point(8,3.75))
+                            sorry.setFill("red")
+                            sorry.draw(gWin)
+                            place = Text(Point(3,3.87),"That place has been taken! Please Try again.")
+                            place.setTextColor("white")
+                            place.setFace("arial")
+                            place.setSize(16)
+                            place.draw(gWin)
+                            time.sleep(1)
+                            sorry.undraw()
+                            place.undraw()
+                
+ #                       fullSqr ()
         winner = whoWon (board, move, gWin)
         if turn > 9:
             winner = 'tie'
@@ -166,9 +196,14 @@ def playerCard (name, p1score, p2score, gWin):
     scoreText2.setTextColor ('black')
     scoreText2.setSize (20)
     scoreText2.draw (gWin)
-
+        
+# Are these actual game pieces being used in the game?
 def gamePieces ():
-    xPiece = Polygon (Point(1, 1), Point(.25, 1.75), Point(1, 1), Point(1.75, 1.75), Point(1, 1), Point(1.75, .25), Point(1, 1), Point(.25, .25))
+
+    xPiece = Polygon (Point(1,1), Point(.25,1.75), Point(1,1), Point(1.75,1.75), Point(1,1), Point(1.75, .25), Point(1, 1), Point(.25, .25))
+    # Why are there so many X pieces?
+    xPiece = Polygon (Point(1,1), Point(.25,1.75), Point(1,1),Point(1.75,1.75), Point(1,1), Point(1.75,.25), Point(1,1,), Point(.25,.25))
+
     xPiece.setWidth (8)
     xPiece.setOutline ('navy')
 
@@ -183,7 +218,7 @@ def playerOrder (players):
     return players
 
 def sidebar (players, xP, oP, gWin):
-    bgc = ['slategray', 'darkcyan', 'lightcoral']
+    bgc = ['azure3', 'dodgerblue2', 'violet']#
     y = 0
     for i in range (3):
         bar = Rectangle (Point (6, y), Point (8, y + 2))
@@ -255,6 +290,7 @@ def startScreen (window):
 
     nameField = []
     x, y = 4, 3.3
+    again = results 
 
     for i in range (2):
         nameField.append (Entry(Point(x, y), 25))
@@ -283,13 +319,17 @@ def startScreen (window):
     clearFeature (nameField)
     clearFeature (startScreen)
     return playerName
-
-def clearFeature (feature):
-    if type(feature) == list:
-        for i in range (len (feature)):
-            feature[i].undraw ()
+########################################
+# How does clearFeature work? 
+def clearFeature (feature):########
+    if type(feature) == list:#
+        for i in range (len (feature)):#
+            feature[i].undraw ()#
     else:
+         # There was an error that stated that feature could not be undrawn. it can't be done with
+         #      [i]-- It says local variable referenced before assignment.
         feature.undraw ()
+#######################################
 
 def createWindow ():
     gameWin = GraphWin ('TicTacToe', 730, 530)
@@ -297,9 +337,11 @@ def createWindow ():
     gameWin.setBackground ('peachpuff')
     return gameWin
 
+# MAIN FUNCTION
 def main ():
     p1score, p2score, again = 0, 0, ''
     gWindow = createWindow ()
+ #   clearBoard=clearFeature(graphics)####
     players = startScreen (gWindow)
     xGamePiece, oGamePiece = gamePieces ()
     sidebar (players, xGamePiece, oGamePiece, gWindow)
@@ -309,7 +351,14 @@ def main ():
         order = playerOrder (list (players))
         playerCard (order, p1score, p2score, gWindow)
         status = runGame (xGamePiece, oGamePiece, gWindow)
-        again = results (order, status, gWindow)
+        print(status)
+        playAgain = results (order, status, gWindow)
+        print(playAgain)#########
+
+        ############################
+        # Can a sentinal loop put put in main? 
+
+        
 
 
 main ()
