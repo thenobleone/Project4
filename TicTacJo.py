@@ -9,6 +9,8 @@
 
 #def scoreboard (gameGUI):
 
+# Added Quit Button
+
 from graphics import *
 import random
 from button import Button
@@ -17,10 +19,10 @@ def results (order, winner, gWin):#######
     #status has transfered as 'winner'
     if winner == 'x':
         wPlayer = order[0]
-    elif winner = 'o':
+    elif winner == 'o':
         wPlayer = order[1]
     else:
-        wPlayer = 'tie'
+        wPlayer == 'tie'
 
     WinBox = Rectangle (Point (2, 4), Point (4, 2))
     WinBox.setFill ('navy')
@@ -43,21 +45,31 @@ def results (order, winner, gWin):#######
 
     if gWin.getKey():#
         for i in range(1):######
-           winMessage.undraw()#
-           WinBox.undraw()#
-           playAgain.undraw()#
+ #          winMessage.undraw()#
+           clearFeature(winMessage)
+ #          WinBox.undraw()#
+           clearFeature(WinBox)
+ #          playAgain.undraw()#
+           clearFeature(playAgain)
            #Game pieces need to be cleared. Only the messages are being cleared at this time.
            #Previous players names need to be cleared. Right now names are just writing over other names.
            clearFeature (gamePieces)# does not clear the game pieces.
-
         return ''
 
     elif gWin.getMouse():######
         #does not close the window at this time.
         gWin.close ()#######
 
-#def quitButton(wind):
-    #quitButton = Button(wind,Point(
+        
+
+def quitButton(wind):
+    quitButton = Button(wind,Point(7,1),2,2,"QUIT")
+    quitButton.activate()
+    pt = wind.getMouse()
+    if quitButton.clicked(pt):
+        wind.close()
+
+        
 
 def whoWon (brd, move, gWin):
     winLine = {
@@ -101,11 +113,8 @@ def whoWon (brd, move, gWin):
         return move
     else:
         return ''
-######################################################
-#def fullSqr (w):
-#    print ("That place has already been taken! Try again.")
-####################################################
-def runGame (xP, oP, gWin):
+
+def runGame (xP, oP, gWin):#################################
     turn = 1
     board = [None] * 9
     winner = ''
@@ -169,7 +178,6 @@ def runGame (xP, oP, gWin):
                             sorry.undraw()
                             place.undraw()
 
- #                       fullSqr ()
         winner = whoWon (board, move, gWin)
         if turn > 9 and winner == '':
             winner = 'tie'
@@ -201,9 +209,6 @@ def playerCard (name, p1score, p2score, gWin):
 def gamePieces ():
 
     xPiece = Polygon (Point(1,1), Point(.25,1.75), Point(1,1), Point(1.75,1.75), Point(1,1), Point(1.75, .25), Point(1, 1), Point(.25, .25))
-    # Why are there so many X pieces?
-    xPiece = Polygon (Point(1,1), Point(.25,1.75), Point(1,1),Point(1.75,1.75), Point(1,1), Point(1.75,.25), Point(1,1,), Point(.25,.25))
-
     xPiece.setWidth (8)
     xPiece.setOutline ('navy')
 
@@ -236,8 +241,8 @@ def sidebar (players, xP, oP, gWin):
     p2Card.move (6,2)
     p2Card.draw (gWin)
 
-    txt = ["SCORECARD", players [0][:9], players[1][:9]]
-    colorName = ['red','navy', 'black']
+    txt = ["SCORECARD", players [0][:9], players[1][:9]]# removed SCORECARD
+    colorName = ["red",'navy', 'black'] # removed red
     SCLoc = [[7, 1.75], [6.5, 1.5], [7.5,1.5]]
 
     for i in range (3):
@@ -319,16 +324,17 @@ def startScreen (window):
     clearFeature (nameField)
     clearFeature (startScreen)
     return playerName
+
 ########################################
 # How does clearFeature work?
 def clearFeature (feature):########
     if type(feature) == list:#
         for i in range (len (feature)):#
             feature[i].undraw ()#
-    else:
+ #   else:
          # There was an error that stated that feature could not be undrawn. it can't be done with
          #      [i]-- It says local variable referenced before assignment.
-        feature.undraw ()
+      #  feature.undraw ()
 #######################################
 
 def createWindow ():
@@ -341,19 +347,23 @@ def createWindow ():
 def main ():
     p1score, p2score, again = 0, 0, ''
     gWindow = createWindow ()
- #   clearBoard=clearFeature(graphics)####
     players = startScreen (gWindow)
     xGamePiece, oGamePiece = gamePieces ()
     sidebar (players, xGamePiece, oGamePiece, gWindow)
-
-    while again == '':
-        drawGrid (gWindow)
-        order = playerOrder (list (players))
-        playerCard (order, p1score, p2score, gWindow)
-        status = runGame (xGamePiece, oGamePiece, gWindow)
-        print(status)
-        playAgain = results (order, status, gWindow)
-        print(playAgain)#########
+    for i in range(9):
+        while again == '':
+            drawGrid (gWindow)
+            order = playerOrder (list (players))
+            playerCard (order,p1score,p2score, gWindow)
+            status = runGame (xGamePiece, oGamePiece, gWindow)
+            print(status)
+ #           playAgain = results (order, status, gWindow)
+            quitButton(gWindow)
+            print(playAgain)#########
+            
+        
+ 
+        
 
         ############################
         # Can a sentinal loop put put in main?
