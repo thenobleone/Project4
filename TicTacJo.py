@@ -15,61 +15,12 @@ from graphics import *
 import random
 from button import Button
 
-def results (order, winner, gWin):#######
-    #status has transfered as 'winner'
-    if winner == 'x':
-        wPlayer = order[0]
-    elif winner == 'o':
-        wPlayer = order[1]
-    else:
-        wPlayer == 'tie'
-
-    WinBox = Rectangle (Point (2, 4), Point (4, 2))
-    WinBox.setFill ('navy')
-    WinBox.setOutline ('black')
-    WinBox.setWidth (3)
-    WinBox.draw (gWin)
-
-    winMessage = Text (Point (3, 3), "{0} wins!".format(wPlayer))
-    winMessage.setFace ('arial')
-    winMessage.setFill ('white')
-    winMessage.setOutline ('steelblue')
-    winMessage.setSize (18)
-    winMessage.draw (gWin)
-
-    playAgain = Text (Point (3, 2.5), "Press <ENTER> To Play Again\nOr Click Window to Close")#
-    playAgain.setTextColor("white")
-    playAgain.setSize(12)
-    playAgain.setStyle("bold")
-    playAgain.draw (gWin)
-
-    if gWin.getKey():#
-        for i in range(1):######
- #          winMessage.undraw()#
-           clearFeature(winMessage)
- #          WinBox.undraw()#
-           clearFeature(WinBox)
- #          playAgain.undraw()#
-           clearFeature(playAgain)
-           #Game pieces need to be cleared. Only the messages are being cleared at this time.
-           #Previous players names need to be cleared. Right now names are just writing over other names.
-           clearFeature (gamePieces)# does not clear the game pieces.
-        return ''
-
-    elif gWin.getMouse():######
-        #does not close the window at this time.
-        gWin.close ()#######
-
-        
-
 def quitButton(wind):
     quitButton = Button(wind,Point(7,1),2,2,"QUIT")
     quitButton.activate()
     pt = wind.getMouse()
     if quitButton.clicked(pt):
         wind.close()
-
-        
 
 def whoWon (brd, move, gWin):
     winLine = {
@@ -114,7 +65,7 @@ def whoWon (brd, move, gWin):
     else:
         return ''
 
-def runGame (xP, oP, gWin):#################################
+def runGame (xP, oP, gWin):
     turn = 1
     board = [None] * 9
     winner = ''
@@ -183,7 +134,7 @@ def runGame (xP, oP, gWin):#################################
             winner = 'tie'
     return winner
 
-def playerCard (name, p1score, p2score, gWin):
+def playerCard (name, gWin):
     y = 4.15
     color = ['navy', 'black']
     for i in range (2):
@@ -194,16 +145,6 @@ def playerCard (name, p1score, p2score, gWin):
         card.setFace ('arial')
         card.draw (gWin)
         y -= 2
-
-    scoreText1 = Text (Point (6.5, .75), p1score)
-    scoreText1.setTextColor ('navy')
-    scoreText1.setSize (20)
-    scoreText1.draw (gWin)
-
-    scoreText2 = Text (Point (7.5, .75), p2score)
-    scoreText2.setTextColor ('black')
-    scoreText2.setSize (20)
-    scoreText2.draw (gWin)
 
 # Are these actual game pieces being used in the game?
 def gamePieces ():
@@ -241,21 +182,7 @@ def sidebar (players, xP, oP, gWin):
     p2Card.move (6,2)
     p2Card.draw (gWin)
 
-    txt = ["SCORECARD", players [0][:9], players[1][:9]]# removed SCORECARD
-    colorName = ["red",'navy', 'black'] # removed red
-    SCLoc = [[7, 1.75], [6.5, 1.5], [7.5,1.5]]
 
-    for i in range (3):
-        sideTxt = Text (Point (SCLoc[i][0], SCLoc[i][1]), txt[i])
-        sideTxt.setFace ('arial')
-        sideTxt.setStyle('bold')
-        sideTxt.setTextColor(colorName[i])
-        sideTxt.setSize(15)
-        sideTxt.draw(gWin)
-
-    scoreLine = Line (Point (7,.15), Point (7, 1.6))
-    scoreLine.setWidth(2)
-    scoreLine.draw (gWin)
 
 def drawGrid (gameGUI):
     gameGUI.setBackground('ivory')
@@ -295,7 +222,6 @@ def startScreen (window):
 
     nameField = []
     x, y = 4, 3.3
-    again = results
 
     for i in range (2):
         nameField.append (Entry(Point(x, y), 25))
@@ -345,30 +271,15 @@ def createWindow ():
 
 # MAIN FUNCTION
 def main ():
-    p1score, p2score, again = 0, 0, ''
     gWindow = createWindow ()
     players = startScreen (gWindow)
     xGamePiece, oGamePiece = gamePieces ()
     sidebar (players, xGamePiece, oGamePiece, gWindow)
-    for i in range(9):
-        while again == '':
-            drawGrid (gWindow)
-            order = playerOrder (list (players))
-            playerCard (order,p1score,p2score, gWindow)
-            status = runGame (xGamePiece, oGamePiece, gWindow)
-            print(status)
- #           playAgain = results (order, status, gWindow)
-            quitButton(gWindow)
-            print(playAgain)#########
-            
-        
- 
-        
 
-        ############################
-        # Can a sentinal loop put put in main?
-
-
-
+    drawGrid (gWindow)
+    order = playerOrder (list (players))
+    playerCard (order, gWindow)
+    status = runGame (xGamePiece, oGamePiece, gWindow)
+    quitButton(gWindow)
 
 main ()
