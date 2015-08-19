@@ -3,12 +3,6 @@
 
 # Tic Tac Toe GUI python game
 
-#def player1 (gameGUI):
-
-#def player2 (gameGUI):
-
-#def scoreboard (gameGUI):
-
 # Added Quit Button
 
 from graphics import *
