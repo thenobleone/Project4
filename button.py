@@ -15,9 +15,14 @@ class Button:
                     p1 = Point(self.xmin, self.ymin)
                     p2 = Point(self.xmax, self.ymax)
                     self.rect = Rectangle(p1,p2)
-                    self.rect.setFill('lightgray')
+                    self.rect.setFill('azure')
+                    self.rect.setOutline('dodgerblue3')
                     self.rect.draw(win)
                     self.label = Text(center, label)
+                    self.label.setSize(20)
+                    self.label.setStyle("bold")
+                    self.label.setFace("arial")
+                    self.label.setTextColor("dodgerblue3")
                     self.label.draw(win)
                     self.deactivate()
 
@@ -33,7 +38,7 @@ class Button:
 
           def activate(self):
                     "Sets this button to 'active'."
-                    self.label.setFill('black')
+                    self.label.setFill('dodgerblue3')
                     self.rect.setWidth(2)
                     self.active = True
 
