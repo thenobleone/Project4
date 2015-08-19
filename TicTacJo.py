@@ -17,8 +17,10 @@ def results (order, winner, gWin):#######
     #status has transfered as 'winner'
     if winner == 'x':
         wPlayer = order[0]
+    elif winner = 'o':
+        wPlayer = order[1]
     else:
-        wPlayer = order[1]  #3, 4
+        wPlayer = 'tie'
 
     WinBox = Rectangle (Point (2, 4), Point (4, 2))
     WinBox.setFill ('navy')
@@ -38,9 +40,7 @@ def results (order, winner, gWin):#######
     playAgain.setSize(12)
     playAgain.setStyle("bold")
     playAgain.draw (gWin)
-    
-    ############################
-    #Would a While loop work better here?
+
     if gWin.getKey():#
         for i in range(1):######
            winMessage.undraw()#
@@ -49,16 +49,16 @@ def results (order, winner, gWin):#######
            #Game pieces need to be cleared. Only the messages are being cleared at this time.
            #Previous players names need to be cleared. Right now names are just writing over other names.
            clearFeature (gamePieces)# does not clear the game pieces.
-           
+
         return ''
-    ######################################
+
     elif gWin.getMouse():######
         #does not close the window at this time.
         gWin.close ()#######
 
-def quitButton(wind):
-    quitButton = Button(wind,Point(
-    
+#def quitButton(wind):
+    #quitButton = Button(wind,Point(
+
 def whoWon (brd, move, gWin):
     winLine = {
         'd1' : Line (Point (.15, .15), Point (5.85, 5.85)),
@@ -168,10 +168,10 @@ def runGame (xP, oP, gWin):
                             time.sleep(1)
                             sorry.undraw()
                             place.undraw()
-                
+
  #                       fullSqr ()
         winner = whoWon (board, move, gWin)
-        if turn > 9:
+        if turn > 9 and winner == '':
             winner = 'tie'
     return winner
 
@@ -196,7 +196,7 @@ def playerCard (name, p1score, p2score, gWin):
     scoreText2.setTextColor ('black')
     scoreText2.setSize (20)
     scoreText2.draw (gWin)
-        
+
 # Are these actual game pieces being used in the game?
 def gamePieces ():
 
@@ -290,7 +290,7 @@ def startScreen (window):
 
     nameField = []
     x, y = 4, 3.3
-    again = results 
+    again = results
 
     for i in range (2):
         nameField.append (Entry(Point(x, y), 25))
@@ -320,7 +320,7 @@ def startScreen (window):
     clearFeature (startScreen)
     return playerName
 ########################################
-# How does clearFeature work? 
+# How does clearFeature work?
 def clearFeature (feature):########
     if type(feature) == list:#
         for i in range (len (feature)):#
@@ -356,9 +356,9 @@ def main ():
         print(playAgain)#########
 
         ############################
-        # Can a sentinal loop put put in main? 
+        # Can a sentinal loop put put in main?
 
-        
+
 
 
 main ()
