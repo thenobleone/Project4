@@ -7,20 +7,6 @@ from graphics import *
 import random
 from button import Button
 
-def quitGame(ndow):
-    quitButton = Button(ndow,Point(3,1),6,2, "Quit")
-    quitButton.activate()
-    pt = ndow.getMouse()
-    if quitButton.clicked(pt):
-            ndow.close()
-
-def submitButton(win):
-    submit = Button(win,Point(14.5,1),17,2, "Submit Your Answer")
-    submit.activate()
-    pt = win.getMouse()
-    if submit.clicked(pt):
-        return submit
-
 # Graphic that 'hides' the mastercode from the user at the top of the board.
 #       note: This is only a graphic to give the impression that the colors
 #       are 'hidden'.
@@ -53,6 +39,7 @@ def finishedCondition (score, win):
     message.setFace("arial")
     message.setSize (20)
 
+    #Control statement to out the correct results
     if score == 'victory':
         message.setText ("!! Congratulations, You Win !!")
         message.setTextColor("yellow")
@@ -193,8 +180,6 @@ def masterCode ():
     return masterColors
 
 # Creates a submit button icon
-###################################
-### NOT IN USE AT THIS TIME ####
 def createButton (win):
     subButton = Rectangle (Point (6, 1.75), Point (23, .25))
     subButton.setFill ('azure')
@@ -394,14 +379,9 @@ def main():
     middleHorz = GuessBoard2(gameWin,middleVertical)
     hideMaster = masterBoard(gameWin)
     colorMasterList = masterCode ()
- #   createQuit = quitGame(gameWin) <------------#### NEEDS WORK
-#    submit = submitButton(gameWin)< ----------- ### NEEDS WORK
 
-
-
-    print (colorMasterList) #<---- this line for testing only!!!
-        #    For loop set to the number of guesses a user is allowed
-    for turnCount in range (8):
+    # For loop set to the number of guesses a user is allowed
+    for turnCount in range (1):
         submit = createButton(gameWin)
         pegCircles = createPegs (gameWin, turnCount)
         boxes = entryBoxes (gameWin, turnCount)
@@ -409,8 +389,6 @@ def main():
         colorGuessList = colorConvert (guess, gameWin, turnCount)
         drawGuess (gameWin, boxes, turnCount, colorGuessList)
         bPeg, wPeg = ansCompare (list (colorMasterList), list (colorGuessList))
- #       createQuit = quitGame(gameWin) < -------- NEEDS WORK
-#        submit = submitButton(gameWin)<----------NEEDS WORK
 
         # The decision tree determines whether the user has won, loss, or has another round of guessing
         if bPeg == 4:
@@ -425,7 +403,6 @@ def main():
             break
         else:
             drawPegs (bPeg, wPeg, pegCircles, gameWin)
-
 
 
 main()
