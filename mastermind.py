@@ -381,7 +381,7 @@ def main():
     colorMasterList = masterCode ()
 
     # For loop set to the number of guesses a user is allowed
-    for turnCount in range (1):
+    for turnCount in range (8):
         submit = createButton(gameWin)
         pegCircles = createPegs (gameWin, turnCount)
         boxes = entryBoxes (gameWin, turnCount)
